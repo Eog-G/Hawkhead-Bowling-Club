@@ -1,21 +1,41 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // --- Mobile Menu (Hamburger) Logic ---
   const menuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const menuIcon = document.getElementById('menu-icon');
   const closeIcon = document.getElementById('close-icon');
 
-  // Defensive check to make sure all elements exist
-  if (!menuButton || !mobileMenu || !menuIcon || !closeIcon) {
-    console.error("Navigation menu elements not found on the page.");
-    return;
+  if (menuButton && mobileMenu && menuIcon && closeIcon) {
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('is-open');
+      menuIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
   }
 
-  menuButton.addEventListener('click', () => {
-    // Toggle the .is-open class on the mobile menu itself
-    mobileMenu.classList.toggle('is-open');
+  // --- Scroll-triggered animation for INDIVIDUAL feature cards ---
+  const featureCards = document.querySelectorAll('#facilities .home-card');
 
-    // Toggle which icon is shown by adding/removing the generic .hidden utility class
-    menuIcon.classList.toggle('hidden');
-    closeIcon.classList.toggle('hidden');
-  });
+  // This check ensures the code only runs if feature cards exist on the page
+  if (featureCards.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        // When a card enters the viewport, add the 'is-visible' class
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          // Stop observing the card once it's visible
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1 // Animation triggers when 10% of the card is visible
+    });
+
+    // Tell the observer to watch each feature card
+    featureCards.forEach(card => {
+      observer.observe(card);
+    });
+  }
+
 });
