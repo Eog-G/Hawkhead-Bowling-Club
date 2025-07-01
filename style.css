@@ -9,22 +9,24 @@
   --color-gray-600: #4b5563;
   --color-gray-800: #1f2937;
   --color-gray-900: #111827;
-  --color-green-50: #f0fdf4;
-  --color-green-100: #dcfce7;
-  --color-green-200: #bbf7d0;
-  --color-green-300: #86efac;
-  --color-green-400: #4ade80;
-  --color-green-500: #22c55e;
-  --color-green-600: #16a34a;
-  --color-green-700: #15803d;
-  --color-green-800: #166534;
-  --color-green-900: #14532d;
+  
+  /* --- MODIFIED: New Blue Color Palette --- */
+  --color-blue-50: #f0f9ff;
+  --color-blue-100: #e0f2fe;
+  --color-blue-200: #bae6fd;
+  --color-blue-300: #7dd3fc;
+  --color-blue-400: #38bdf8;
+  --color-blue-500: #0ea5e9;
+  --color-blue-600: #0284c7; /* A bright, energetic primary blue */
+  --color-blue-700: #0369a1;
+  --color-blue-800: #075985;
+  --color-blue-900: #0c4a6e; /* A rich, deep navy for dark areas */
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
-  background-color: var(--color-gray-900);
+  background-color: var(--color-blue-900); /* Changed to white for better contrast */
   color: var(--color-gray-800);
 }
 
@@ -52,7 +54,7 @@ body {
 }
 
 .top-bar {
-  background-color: var(--color-green-800);
+  background-color: var(--color-blue-800); /* MODIFIED */
   color: var(--color-white);
   padding: 0.25rem 0;
 }
@@ -92,7 +94,7 @@ body {
 .logo-icon {
   width: 3rem;
   height: 3rem;
-  background-color: var(--color-green-600);
+  background-color: var(--color-blue-600); /* MODIFIED */
   border-radius: 9999px;
   display: flex;
   align-items: center;
@@ -134,33 +136,26 @@ body {
   width: 1.5rem;
 }
 
-
-/* --- MODIFIED --- */
-/* We change 'display: none' to animating max-height and opacity */
 .mobile-nav {
-  display: flex; /* Keep it as flex for layout */
+  display: flex; 
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0 0.75rem; /* Adjust padding for the new animation style */
+  padding: 0 0.75rem;
   border-top: 1px solid var(--color-gray-300);
-  
-  /* Animation properties */
   max-height: 0;
   opacity: 0;
-  overflow: hidden; /* Crucial: hides the content while the container is closed */
-  pointer-events: none; /* Prevent clicking on hidden links */
+  overflow: hidden; 
+  pointer-events: none; 
   transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
 }
 
-/* --- MODIFIED --- */
-/* When open, we set max-height to a large value and opacity to 1 */
 .mobile-nav.is-open {
-  max-height: 500px; /* A value larger than the menu's content will ever be */
+  max-height: 500px;
   opacity: 1;
-  pointer-events: auto; /* Allow clicking on links again */
+  pointer-events: auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out 0.1s; /* Delay opacity */
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out 0.1s;
 }
 
 .nav-link {
@@ -174,37 +169,28 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--color-green-700);
-  background-color: var(--color-green-50);
+  color: var(--color-blue-700); /* MODIFIED */
+  background-color: var(--color-blue-50); /* MODIFIED */
 }
 
 .nav-link.active {
-  color: var(--color-green-700);
-  background-color: var(--color-green-50);
+  color: var(--color-blue-700); /* MODIFIED */
+  background-color: var(--color-blue-100); /* MODIFIED */
 }
 
-/* --- MODIFIED --- */
 .mobile-nav .nav-link {
   font-size: 1rem;
   text-align: left;
-  
-  /* --- NEW --- */
-  /* Initial state for the staggered animation */
   opacity: 0;
   transform: translateX(-20px);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* --- NEW --- */
-/* When the menu is open, make the links visible */
 .mobile-nav.is-open .nav-link {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* --- NEW --- */
-/* This is the magic for the "flowy" staggered effect. */
-/* We apply a different transition delay to each link. */
 .mobile-nav.is-open .nav-link:nth-child(1) { transition-delay: 0.15s; }
 .mobile-nav.is-open .nav-link:nth-child(2) { transition-delay: 0.20s; }
 .mobile-nav.is-open .nav-link:nth-child(3) { transition-delay: 0.25s; }
@@ -213,10 +199,10 @@ body {
 .mobile-nav.is-open .nav-link:nth-child(6) { transition-delay: 0.40s; }
 
 
-/* (The rest of the CSS for Hero, Features, etc. remains the same) */
+/* --- Hero Section --- */
 .hero-section {
   position: relative;
-  background: linear-gradient(to bottom right, var(--color-green-900), var(--color-green-700));
+  background: linear-gradient(to bottom right, var(--color-blue-900), var(--color-blue-700)); /* MODIFIED */
   color: var(--color-white);
   overflow: hidden;
 }
@@ -242,13 +228,13 @@ body {
 
 .hero-subtitle {
   display: block;
-  color: var(--color-green-200);
+  color: var(--color-blue-200); /* MODIFIED */
 }
 
 .hero-tagline {
   font-size: 1.25rem;
   margin-bottom: 2rem;
-  color: var(--color-green-100);
+  color: var(--color-blue-100); /* MODIFIED */
 }
 
 .hero-description {
@@ -257,7 +243,7 @@ body {
   max-width: 42rem;
   margin-left: auto;
   margin-right: auto;
-  color: var(--color-green-50);
+  color: var(--color-blue-50); /* MODIFIED */
 }
 
 .hero-buttons {
@@ -287,22 +273,22 @@ body {
 }
 
 .button-primary {
-  background-color: var(--color-green-600);
+  background-color: var(--color-blue-600); /* MODIFIED */
   color: var(--color-white);
 }
 
 .button-primary:hover {
-  background-color: var(--color-green-500);
+  background-color: var(--color-blue-500); /* MODIFIED */
 }
 
 .button-secondary {
-  border: 2px solid var(--color-green-300);
-  color: var(--color-green-100);
+  border: 2px solid var(--color-blue-300); /* MODIFIED */
+  color: var(--color-blue-100); /* MODIFIED */
 }
 
 .button-secondary:hover {
-  background-color: var(--color-green-300);
-  color: var(--color-green-900);
+  background-color: var(--color-blue-300); /* MODIFIED */
+  color: var(--color-blue-900); /* MODIFIED */
 }
 
 .button-icon {
@@ -324,7 +310,7 @@ body {
 }
 
 .stat-icon-wrapper {
-  background-color: rgba(22, 163, 74, 0.3);
+  background-color: rgba(59, 130, 246, 0.3); /* MODIFIED */
   border-radius: 9999px;
   width: 4rem;
   height: 4rem;
@@ -337,18 +323,18 @@ body {
 .stat-icon {
   height: 2rem;
   width: 2rem;
-  color: var(--color-green-200);
+  color: var(--color-blue-200); /* MODIFIED */
 }
 
 .stat-number {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-green-200);
+  color: var(--color-blue-200); /* MODIFIED */
   margin: 0;
 }
 
 .stat-label {
-  color: var(--color-green-100);
+  color: var(--color-blue-100); /* MODIFIED */
   margin: 0;
 }
 
@@ -393,7 +379,7 @@ body {
     transform: scale(1.02);
 }
 .feature-icon-wrapper {
-    background-color: var(--color-green-100);
+    background-color: var(--color-blue-100); /* MODIFIED */
     width: 4rem;
     height: 4rem;
     border-radius: 9999px;
@@ -405,7 +391,7 @@ body {
 .feature-icon {
     height: 2rem;
     width: 2rem;
-    color: var(--color-green-600);
+    color: var(--color-blue-600); /* MODIFIED */
 }
 .feature-title {
     font-size: 1.25rem;
@@ -471,16 +457,16 @@ body {
 .news-card-link {
     display: inline-flex;
     align-items: center;
-    color: var(--color-green-600);
+    color: var(--color-blue-600); /* MODIFIED */
     font-weight: 500;
     text-decoration: none;
 }
 .news-card-link:hover {
-    color: var(--color-green-700);
+    color: var(--color-blue-700); /* MODIFIED */
 }
 
 .site-footer {
-    background-color: var(--color-gray-900);
+    background-color: var(--color-blue-900); /* MODIFIED */
     color: var(--color-white);
 }
 .footer-grid {
@@ -509,7 +495,7 @@ body {
     flex-shrink: 0;
     height: 1.25rem;
     width: 1.25rem;
-    color: var(--color-green-400);
+    color: var(--color-blue-400); /* MODIFIED */
     margin-top: 0.125rem;
 }
 .footer-subheading {
@@ -525,7 +511,7 @@ body {
     transition: color 0.2s;
 }
 .footer-link:hover, .social-link:hover {
-    color: var(--color-green-400);
+    color: var(--color-blue-400); /* MODIFIED */
 }
 .footer-bottom {
     border-top: 1px solid var(--color-gray-800);
@@ -553,8 +539,6 @@ body {
     .mobile-nav {
         display: none !important; 
     }
-
-    /* Other desktop adjustments */
     .hero-buttons {
         flex-direction: row;
     }
@@ -588,16 +572,12 @@ body {
     .news-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-
-    /* --- NEW: Specific, tidier layout for the contact cards on desktop --- */
     #club-contacts-container {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-/* --- NEW: Styles for the Contact Page Cards & Animations --- */
-
-/* Keyframe animation for the cards to fade and slide up */
+/* --- Styles for the Contact Page Cards & Animations --- */
 @keyframes cardFadeInUp {
   from {
     opacity: 0;
@@ -608,27 +588,21 @@ body {
     transform: translateY(0);
   }
 }
-
-/* Base styles for the new contact card */
 .contact-card {
   border: 1px solid var(--color-gray-200);
-  border-radius: 0.75rem; /* Slightly more rounded */
+  border-radius: 0.75rem;
   padding: 1.5rem;
   display: flex;
   align-items: center;
   gap: 1rem;
-  
-  /* Set initial state for animation */
   opacity: 0; 
-  /* Apply the animation */
   animation: cardFadeInUp 0.6s ease-out forwards;
-
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
 
 .contact-card:hover{
-      transform: translateY(-5px);
+  transform: translateY(-5px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
@@ -639,53 +613,72 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-green-100);
-  color: var(--color-green-700);
+  background-color: var(--color-blue-100); /* MODIFIED */
+  color: var(--color-blue-700); /* MODIFIED */
   border-radius: 9999px;
 }
-
 .contact-card-icon svg {
     width: 1.5rem;
     height: 1.5rem;
 }
-
 .contact-card-content {
   display: flex;
   flex-direction: column;
 }
-
 .contact-card-title {
   font-size: 1rem;
   font-weight: 500;
   color: var(--color-gray-600);
   margin: 0 0 0.25rem 0;
 }
-
 .contact-card-value {
   font-size: 1.125rem;
   font-weight: 600;
-  color: var(--color-green-700);
+  color: var(--color-blue-700); /* MODIFIED */
   text-decoration: none;
   transition: color 0.2s;
 }
-
 .contact-card-value:hover {
-  color: var(--color-green-800);
+  color: var(--color-blue-800); /* MODIFIED */
   text-decoration: underline;
 }
 
-/* Staggered Animation Delay for Club Contacts */
+/* --- NEW: Animation for Homepage Feature Cards --- */
+
+/* Target the feature cards specifically within the #facilities section
+  to avoid affecting other cards on the site.
+*/
+#facilities .feature-card {
+  /* Set the initial state for the animation */
+  opacity: 0; 
+  
+  /* Apply the animation, telling it to stay in its final state (forwards) */
+  animation: cardFadeInUp 0.6s ease-out forwards;
+}
+
+/* Apply a sequential delay to each card so they animate in one by one.
+*/
+#facilities .feature-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+#facilities .feature-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+#facilities .feature-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+#facilities .feature-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
 #club-contacts-container .contact-card:nth-child(1) { animation-delay: 0.1s; }
 #club-contacts-container .contact-card:nth-child(2) { animation-delay: 0.2s; }
 #club-contacts-container .contact-card:nth-child(3) { animation-delay: 0.3s; }
 #club-contacts-container .contact-card:nth-child(4) { animation-delay: 0.4s; }
 #club-contacts-container .contact-card:nth-child(5) { animation-delay: 0.5s; }
 
-/* Staggered Animation Delay for External Links (for consistency) */
 #external-links-container .feature-card {
-  /* Set initial state for animation */
   opacity: 0; 
-  /* Apply the animation */
   animation: cardFadeInUp 0.6s ease-out forwards;
 }
 #external-links-container .feature-card:nth-child(1) { animation-delay: 0.6s; }
