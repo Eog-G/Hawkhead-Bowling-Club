@@ -1,0 +1,48 @@
+{
+  "pageIntro": "Below are contacts within the club and some useful external links. Click on the links to access the sites.",
+  "clubContacts": [
+    {
+      "name": "Hawkhead BC Phone Number",
+      "value": "0141 561 7040",
+      "type": "phone"
+    },
+    {
+      "name": "Facebook Page",
+      "value": "https://www.facebook.com/hawkheadbowlingclub/",
+      "type": "link"
+    },
+    {
+      "name": "Club Email",
+      "value": "hawkheadbowlingclub@hotmail.com",
+      "type": "email"
+    },
+    {
+      "name": "Gents Section Email",
+      "value": "gmcnidder1508@btinternet.com",
+      "type": "email"
+    },
+    {
+      "name": "Membership Application",
+      "value": "/assets/forms/membership-form.rtf",
+      "type": "download"
+    }
+  ],
+  "externalLinks": [
+    {
+      "name": "Bowls Scotland",
+      "url": "https://scottish-bowling.co.uk/"
+    },
+    {
+      "name": "Bowling Clubs in Scotland",
+      "url": "http://bowlsclub.org/associations/lawn/GB/SBA/10/"
+    },
+    {
+      "name": "Scottish Bowls",
+      "url": "http://www.scottishbowls.co.uk/"
+    },
+    {
+      "name": "Scottish Young Bowlers Association",
+      "url": "http://www.syba.co.uk/defaultsite"
+    }
+  ]
+}

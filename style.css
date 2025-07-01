@@ -1,0 +1,694 @@
+/* --- Global Styles & CSS Variables --- */
+:root {
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-green-50: #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  background-color: var(--color-gray-900);
+  color: var(--color-gray-800);
+}
+
+.container {
+  width: 90%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* --- Header --- */
+.site-header {
+  background-color: var(--color-white);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.top-bar {
+  background-color: var(--color-green-800);
+  color: var(--color-white);
+  padding: 0.25rem 0;
+}
+
+.top-bar-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.875rem;
+  gap: 1rem;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.contact-icon {
+  height: 0.75rem;
+  width: 0.75rem;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 4rem;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-icon {
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--color-green-600);
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.logo-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.logo-subtitle {
+  font-size: 0.875rem;
+  color: var(--color-gray-600);
+  margin: 0;
+}
+
+/* --- Navigation Styles (Mobile First) --- */
+
+.desktop-nav {
+  display: none;
+}
+
+.mobile-menu-button {
+  display: block;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-icon-svg {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+
+/* --- MODIFIED --- */
+/* We change 'display: none' to animating max-height and opacity */
+.mobile-nav {
+  display: flex; /* Keep it as flex for layout */
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0 0.75rem; /* Adjust padding for the new animation style */
+  border-top: 1px solid var(--color-gray-300);
+  
+  /* Animation properties */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden; /* Crucial: hides the content while the container is closed */
+  pointer-events: none; /* Prevent clicking on hidden links */
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* --- MODIFIED --- */
+/* When open, we set max-height to a large value and opacity to 1 */
+.mobile-nav.is-open {
+  max-height: 500px; /* A value larger than the menu's content will ever be */
+  opacity: 1;
+  pointer-events: auto; /* Allow clicking on links again */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out 0.1s; /* Delay opacity */
+}
+
+.nav-link {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s, background-color 0.2s;
+  color: var(--color-gray-700);
+}
+
+.nav-link:hover {
+  color: var(--color-green-700);
+  background-color: var(--color-green-50);
+}
+
+.nav-link.active {
+  color: var(--color-green-700);
+  background-color: var(--color-green-50);
+}
+
+/* --- MODIFIED --- */
+.mobile-nav .nav-link {
+  font-size: 1rem;
+  text-align: left;
+  
+  /* --- NEW --- */
+  /* Initial state for the staggered animation */
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* --- NEW --- */
+/* When the menu is open, make the links visible */
+.mobile-nav.is-open .nav-link {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- NEW --- */
+/* This is the magic for the "flowy" staggered effect. */
+/* We apply a different transition delay to each link. */
+.mobile-nav.is-open .nav-link:nth-child(1) { transition-delay: 0.15s; }
+.mobile-nav.is-open .nav-link:nth-child(2) { transition-delay: 0.20s; }
+.mobile-nav.is-open .nav-link:nth-child(3) { transition-delay: 0.25s; }
+.mobile-nav.is-open .nav-link:nth-child(4) { transition-delay: 0.30s; }
+.mobile-nav.is-open .nav-link:nth-child(5) { transition-delay: 0.35s; }
+.mobile-nav.is-open .nav-link:nth-child(6) { transition-delay: 0.40s; }
+
+
+/* (The rest of the CSS for Hero, Features, etc. remains the same) */
+.hero-section {
+  position: relative;
+  background: linear-gradient(to bottom right, var(--color-green-900), var(--color-green-700));
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.hero-content {
+  position: relative;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.hero-subtitle {
+  display: block;
+  color: var(--color-green-200);
+}
+
+.hero-tagline {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: var(--color-green-100);
+}
+
+.hero-description {
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--color-green-50);
+}
+
+.hero-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.button {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.button-primary {
+  background-color: var(--color-green-600);
+  color: var(--color-white);
+}
+
+.button-primary:hover {
+  background-color: var(--color-green-500);
+}
+
+.button-secondary {
+  border: 2px solid var(--color-green-300);
+  color: var(--color-green-100);
+}
+
+.button-secondary:hover {
+  background-color: var(--color-green-300);
+  color: var(--color-green-900);
+}
+
+.button-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-icon-wrapper {
+  background-color: rgba(22, 163, 74, 0.3);
+  border-radius: 9999px;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.stat-icon {
+  height: 2rem;
+  width: 2rem;
+  color: var(--color-green-200);
+}
+
+.stat-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-green-200);
+  margin: 0;
+}
+
+.stat-label {
+  color: var(--color-green-100);
+  margin: 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.section-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: 1rem;
+}
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--color-gray-600);
+  max-width: 42rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-footer {
+    text-align: center;
+}
+
+.features-section {
+    padding: 4rem 0;
+    background-color: var(--color-white);
+}
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+}
+.feature-card {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    transition: box-shadow 0.3s, transform 0.2s ease-in-out;
+}
+.feature-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    transform: scale(1.02);
+}
+.feature-icon-wrapper {
+    background-color: var(--color-green-100);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+.feature-icon {
+    height: 2rem;
+    width: 2rem;
+    color: var(--color-green-600);
+}
+.feature-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: 0.75rem;
+}
+.feature-description {
+    color: var(--color-gray-600);
+}
+
+.news-section {
+    padding: 4rem 0;
+    background-color: var(--color-gray-50);
+}
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+.news-card {
+    background-color: var(--color-white);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: box-shadow 0.3s, transform 0.2s ease-in-out;
+}
+.news-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    transform: scale(1.02);
+}
+.news-card-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+}
+.news-card-content {
+    padding: 1.5rem;
+}
+.news-card-meta {
+    display: flex;
+    align-items: center;
+    color: var(--color-gray-500);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+.news-card-icon {
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.5rem;
+}
+.news-card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-gray-900);
+    margin-bottom: 0.75rem;
+}
+.news-card-excerpt {
+    color: var(--color-gray-600);
+    margin-bottom: 1rem;
+}
+.news-card-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-green-600);
+    font-weight: 500;
+    text-decoration: none;
+}
+.news-card-link:hover {
+    color: var(--color-green-700);
+}
+
+.site-footer {
+    background-color: var(--color-gray-900);
+    color: var(--color-white);
+}
+.footer-grid {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+.footer-heading {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.footer-contact-info, .quick-links, .social-links, .opening-hours-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+.footer-icon {
+    flex-shrink: 0;
+    height: 1.25rem;
+    width: 1.25rem;
+    color: var(--color-green-400);
+    margin-top: 0.125rem;
+}
+.footer-subheading {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+.social-links {
+    flex-direction: row;
+}
+.footer-link, .social-link {
+    color: var(--color-gray-300);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.footer-link:hover, .social-link:hover {
+    color: var(--color-green-400);
+}
+.footer-bottom {
+    border-top: 1px solid var(--color-gray-800);
+    margin-top: 3rem;
+    padding-top: 2rem;
+    text-align: center;
+    color: var(--color-gray-400);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-content > * { animation: fadeIn 0.8s ease-out forwards; }
+
+/* --- Responsive Styles (Desktop) --- */
+@media (min-width: 768px) { /* md breakpoint */
+    .desktop-nav {
+        display: flex;
+        gap: 1.5rem;
+    }
+    .mobile-menu-button {
+        display: none;
+    }
+    .mobile-nav {
+        display: none !important; 
+    }
+
+    /* Other desktop adjustments */
+    .hero-buttons {
+        flex-direction: row;
+    }
+    .hero-title {
+        font-size: 3.75rem;
+    }
+    .hero-tagline {
+        font-size: 1.5rem;
+    }
+    .hero-stats {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .section-title {
+        font-size: 2.25rem;
+    }
+}
+
+@media (min-width: 1024px) { /* lg breakpoint */
+    .features-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .news-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* --- NEW: Specific, tidier layout for the contact cards on desktop --- */
+    #club-contacts-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --- NEW: Styles for the Contact Page Cards & Animations --- */
+
+/* Keyframe animation for the cards to fade and slide up */
+@keyframes cardFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base styles for the new contact card */
+.contact-card {
+  border: 1px solid var(--color-gray-200);
+  border-radius: 0.75rem; /* Slightly more rounded */
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  /* Set initial state for animation */
+  opacity: 0; 
+  /* Apply the animation */
+  animation: cardFadeInUp 0.6s ease-out forwards;
+
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card:hover{
+      transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card-icon {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-green-100);
+  color: var(--color-green-700);
+  border-radius: 9999px;
+}
+
+.contact-card-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.contact-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-card-title {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-gray-600);
+  margin: 0 0 0.25rem 0;
+}
+
+.contact-card-value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-green-700);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.contact-card-value:hover {
+  color: var(--color-green-800);
+  text-decoration: underline;
+}
+
+/* Staggered Animation Delay for Club Contacts */
+#club-contacts-container .contact-card:nth-child(1) { animation-delay: 0.1s; }
+#club-contacts-container .contact-card:nth-child(2) { animation-delay: 0.2s; }
+#club-contacts-container .contact-card:nth-child(3) { animation-delay: 0.3s; }
+#club-contacts-container .contact-card:nth-child(4) { animation-delay: 0.4s; }
+#club-contacts-container .contact-card:nth-child(5) { animation-delay: 0.5s; }
+
+/* Staggered Animation Delay for External Links (for consistency) */
+#external-links-container .feature-card {
+  /* Set initial state for animation */
+  opacity: 0; 
+  /* Apply the animation */
+  animation: cardFadeInUp 0.6s ease-out forwards;
+}
+#external-links-container .feature-card:nth-child(1) { animation-delay: 0.6s; }
+#external-links-container .feature-card:nth-child(2) { animation-delay: 0.7s; }
+#external-links-container .feature-card:nth-child(3) { animation-delay: 0.8s; }
+#external-links-container .feature-card:nth-child(4) { animation-delay: 0.9s; }
