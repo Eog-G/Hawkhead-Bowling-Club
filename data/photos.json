@@ -1,67 +1,231 @@
 {
   "albums": [
     {
-      "name": "Bowl, BBQ, and Fun Night",
-      "folder": "bowl_bbq_and_fun_night_2019",
-      "date": "2019-08-05",
-      "photos": [
-        {
-          "filename": "1.jpg",
-          "caption": ""
-        },
-        {
-          "filename": "2.jpg",
-          "caption": ""
-        },
-        {
-          "filename": "3.jpg",
-          "caption": ""
-        },
-        {
-          "filename": "4.jpg",
-          "caption": ""
-        },
-        {
-          "filename": "5.jpg",
-          "caption": ""
-        },
-        {
-          "filename": "6.jpg",
-          "caption": ""
-        },
-        {
-          "filename": "7.jpg",
-          "caption": ""
-        },
-        {
-          "filename": "8.jpg",
-          "caption": ""
-        }
-      ]
+        "name": "Bowl, BBQ, and Fun Night",
+        "folder": "bowl_bbq_and_fun_night_2019",
+        "date": "2019-08-05",
+        "description": "On Saturday 3rd August, over 60 members and friends enjoyed our second annual “Bowl, BBQ and Fun Night” to raise funds for the Club’s 2021 Centenary. The weather didn’t match last year’s sunshine, but everyone still played a few ends before the rain came. Our dedicated BBQ team served over 100 people, and the night ended with games, raffles, a quiz, and prizes for the first visitor to get a “chalker” and the top rink. Thank you to everyone who came and helped make it a great success!",
+
+        "photos": [
+            {
+            "filename": "1.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "2.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "3.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "4.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "5.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "6.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "7.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "8.jpg",
+            "caption": ""
+            }
+        ]
     },
+
     {
-      "name": "Social Events",
-      "folder": "social_events",
-      "date": "2025-06-15",
-      "photos": [
-        {
-          "filename": "annual_dinner.png",
-          "caption": "Fun at the annual club dinner."
-        },
-        {
-          "filename": "quiz_night.jpg"
-        }
-      ]
+        "name": "Opening of the Greens for Season 2019",
+        "folder": "opening_of_the_greens_2019",
+        "date": "2019-04-13",
+
+        "photos": [
+            {
+            "filename": "1.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "2.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "3.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "4.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "5.jpg",
+            "caption": ""
+            }
+        ]
     },
+
     {
-      "name": "Opening Day 2025",
-      "folder": "opening_day_2025",
-      "date": "2025-04-12",
-      "photos": [
-        {
-          "filename": "first_bowl.jpg"
-        }
-      ]
+        "name": "Centenary Bowl, BBQ, and Fun Night 2018",
+        "folder": "bowl_bbq_and_fun_night_2018",
+        "date": "2018-08-05",
+
+        "photos": [
+            {
+            "filename": "1.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "2.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "3.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "4.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "5.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "6.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "7.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "8.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "9.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "10.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "11.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "12.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "13.jpg",
+            "caption": ""
+            }
+        ]
+    },
+
+    {
+        "name": "Opening of the Greens for Season 2018",
+        "folder": "opening_of_the_greens_2018",
+        "date": "2018-04-15",
+        "description": "The greens opened on Friday 13th April. Despite the chilly weather, 16 members and guests played 5 ends. Claire McGroarty, daughter of Gents' President John McGroarty, delivered the silver jack and impressively got a toucher with her first ever bowl! The flag was raised by Honorary President Matt Paul and Executive Chair Moira Bryan. Afterwards, everyone enjoyed hospitality in the hall. The opening dance on Saturday 14th featured vocalist Andy Sommers and a fish supper. The Centenary Group raffle draw raised £111, with John Forbes winning 6 bottles of spirits — congratulations, and thank you to everyone who bought tickets!",
+
+        "photos": [
+            {
+            "filename": "1.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "2.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "3.jpg",
+            "caption": ""
+            }
+        ]
+    },
+
+    {
+        "name": "Christmas Dance 2017",
+        "folder": "christmas_dance_2017",
+        "date": "2017-12-17",
+        "description": "Who needs Strictly? Members and friends had a fantastic time at the Christmas Dance, with music from Elaine Dallas on guitar and vocals.",
+
+        "photos": [
+            {
+            "filename": "1.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "2.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "3.jpg",
+            "caption": ""
+            }
+        ]
+    },
+
+    {
+        "name": "Christmas Beetle Drive 2017",
+        "folder": "christmas_beetle_drive_2017",
+        "date": "2017-12-12",
+        "description": "Hawkhead Ladies held their annual Christmas Beetle Drive and presented a £1,000 cheque to a representative from Parkinson’s UK.",
+
+        "photos": [
+            {
+            "filename": "1.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "2.jpg",
+            "caption": ""
+            }
+        ]
+    },
+
+    {
+        "name": "Hawkhead Bowling Club 2017",
+        "folder": "hawkhead_bowling_club_2017",
+        "date": "2017-11-18",
+        "description": "A look around our clubhouse and greens — the heart of our club and the perfect setting for bowling, events, and good company.",
+
+        "photos": [
+            {
+            "filename": "1.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "2.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "3.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "4.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "5.jpg",
+            "caption": ""
+            },
+            {
+            "filename": "6.jpg",
+            "caption": ""
+            }
+        ]
     }
   ]
 }
