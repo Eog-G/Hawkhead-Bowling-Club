@@ -26,9 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const card = document.createElement('div');
                     card.className = 'key-person-card fade-in-up';
                     let iconHtml = '';
-                    if (person.title.toLowerCase().includes('president')) {
-                        iconHtml = icons.president;
-                    } else if (person.title.toLowerCase().includes('champion')) {
+                    if (person.title.toLowerCase().includes('president')) iconHtml = icons.president;
+                    else if (person.title.toLowerCase().includes('champion')) {
                         iconHtml = icons.champion;
                         card.id = 'champion-card';
                     }
@@ -38,6 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 gentsContentContainer.appendChild(keyPeopleContainer);
             }
             
+            // --- Separator 1 ---
+            const separator1 = document.createElement('hr');
+            separator1.className = 'content-separator fade-in-up';
+            gentsContentContainer.appendChild(separator1);
+
             if (data.committee && data.committee.length > 0) {
                 const committeeSection = document.createElement('div');
                 committeeSection.className = 'content-section fade-in-up';
@@ -56,56 +60,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 committeeSection.appendChild(gridContainer);
                 gentsContentContainer.appendChild(committeeSection);
             }
+            
+            // --- Separator 2 ---
+            const separator2 = document.createElement('hr');
+            separator2.className = 'content-separator fade-in-up';
+            gentsContentContainer.appendChild(separator2);
 
-            // --- REFACTORED: Create and initialize TimelineJS ---
             if (data.outdoorEvents && data.outdoorEvents.length > 0) {
-                // 1. Create the wrapper section with its own background
                 const eventsSection = document.createElement('section');
                 eventsSection.className = 'events-section fade-in-up';
-                
-                // 2. Add our own heading
                 const title = document.createElement('h3');
                 title.className = 'content-subtitle';
                 title.textContent = '2025 Outdoor Events';
                 eventsSection.appendChild(title);
-
-                // 3. Add the div that the timeline will be built inside
-                const timelineEmbed = document.createElement('div');
-                timelineEmbed.id = 'timeline-embed';
-                eventsSection.appendChild(timelineEmbed);
-
-                // 4. Append the whole new section to the page
+                const timelineContainer = document.createElement('div');
+                timelineContainer.className = 'vertical-timeline';
+                const sortedEvents = data.outdoorEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+                const now = new Date();
+                sortedEvents.forEach(event => {
+                    const eventDate = new Date(event.date);
+                    const item = document.createElement('div');
+                    item.className = 'timeline-event';
+                    if (eventDate < now) {
+                        item.classList.add('is-past');
+                    }
+                    const formattedDate = eventDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+                    item.innerHTML = `<div class="event-date">${formattedDate}</div><div class="event-name">${event.name}</div>`;
+                    timelineContainer.appendChild(item);
+                });
+                eventsSection.appendChild(timelineContainer);
                 gentsContentContainer.parentElement.appendChild(eventsSection);
-
-                // 5. Format data for the library
-                const timelineData = {
-                    // We no longer need a title here, as we have our own
-                    events: data.outdoorEvents.map(event => {
-                        const eventDate = new Date(event.date);
-                        return {
-                            start_date: {
-                                year: eventDate.getFullYear(),
-                                month: eventDate.getMonth() + 1,
-                                day: eventDate.getDate()
-                            },
-                            text: {
-                                headline: event.name
-                            }
-                        };
-                    })
-                };
-
-                // 6. Set simplified options
-                const timelineOptions = {
-                    timenav_position: "none", // This is the key to simplifying the look
-                    initial_zoom: 0,
-                    hash_bookmark: false
-                };
-
-                // 7. Create the timeline
-                window.timeline = new TL.Timeline('timeline-embed', timelineData, timelineOptions);
             }
 
+            // --- Animation Observer ---
             const animatedElements = document.querySelectorAll('.fade-in-up');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
@@ -113,9 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         entry.target.style.transitionDelay = `${index * 100}ms`;
                         entry.target.classList.add('is-visible');
                         if (entry.target.id === 'champion-card') {
-                            setTimeout(() => {
-                                party.confetti(entry.target, { count: party.variation.range(40, 60) });
-                            }, 400);
+                            setTimeout(() => { party.confetti(entry.target, { count: party.variation.range(40, 60) }); }, 400);
                         }
                         observer.unobserve(entry.target);
                     }
