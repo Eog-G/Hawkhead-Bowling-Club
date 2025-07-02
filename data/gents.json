@@ -13,15 +13,15 @@
     }
   ],
   "committee": [
-    { "role": "President", "name": "John Doe" },
-    { "role": "Vice President", "name": "Peter Jones" },
-    { "role": "Imm Past President", "name": "James Wilson" },
-    { "role": "Secretary", "name": "Alan Brown" },
-    { "role": "Treasurer", "name": "David Miller" },
-    { "role": "Director", "name": "Chris Green" },
-    { "role": "Director", "name": "Mark White" },
-    { "role": "Director", "name": "Paul Black" },
-    { "role": "Director", "name": "Steven Gray" }
+    { "role": "President", "name": "D. Watson" },
+    { "role": "Vice President", "name": "N. Campbell" },
+    { "role": "Imm Past President", "name": "T. Hindle" },
+    { "role": "Secretary", "name": "G. NcNidder" },
+    { "role": "Treasurer", "name": "T. Scholes" },
+    { "role": "Director", "name": "D. Bennie" },
+    { "role": "Director", "name": "J. Forbes" },
+    { "role": "Director", "name": "H. Kerr" },
+    { "role": "Director", "name": "D. Sprot" }
   ],
   "outdoorEvents": [
     { "date": "2025-04-12", "name": "Opening Day" },
