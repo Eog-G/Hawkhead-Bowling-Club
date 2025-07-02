@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact Us - Hawkhead Bowling Club</title>
-  <meta name="description" content="Contact information and useful links for Hawkhead Bowling Club, Paisley." />
+  <title>Photo Gallery - Hawkhead Bowling Club</title>
+  <meta name="description" content="Photo gallery of events and life at Hawkhead Bowling Club, Paisley." />
   
   <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="/Pages/Photos/photos.css">
   <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 </head>
-
 <body>
 
   <header class="site-header">
@@ -29,8 +28,8 @@
     <div class="main-header container">
       <div class="logo-area">
         <div class="logo-icon">
-      <img src="../../assets/images/HBCLogo.png" alt="Hawkhead Bowling Club Crest" />
-    </div>
+          <img src="../../assets/images/HBCLogo.png" alt="Hawkhead Bowling Club Crest" />
+        </div>
         <div>
           <h1 class="logo-title">Hawkhead Bowling Club</h1>
           <p class="logo-subtitle">Est. 1912</p>
@@ -38,13 +37,12 @@
       </div>
       <nav class="desktop-nav">
         <a href="../../#home" class="nav-link">Home</a>
-        <a href="../../#about" class="nav-link">About</a>
-        <a href="../../#facilities" class="nav-link">Facilities</a>
-        <a href="../../#membership" class="nav-link">Membership</a>
+        <a href="../../#about" class="nav-link">Gents</a>
+        <a href="../../#facilities" class="nav-link">Ladies</a>
+        <a href="../../#membership" class="nav-link">Social</a>
         <a href="../../#events" class="nav-link">Events</a>
-        <a href="#" class="nav-link active">Contact</a>
-        <a href="/Pages/Photos/index.html" class="nav-link">Photos</a>
-        
+        <a href="../../Pages/Contacts/index.html" class="nav-link">Contact</a>
+        <a href="#" class="nav-link active">Photos</a>
       </nav>
       <button id="mobile-menu-button" class="mobile-menu-button">
         <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon-svg"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
@@ -53,42 +51,40 @@
     </div>
     <nav id="mobile-menu" class="mobile-nav">
         <a href="../../#home" class="nav-link">Home</a>
-        <a href="../../#about" class="nav-link">About</a>
-        <a href="../../#facilities" class="nav-link">Facilities</a>
+        <a href="../../#about" class="nav-link">Gents</a>
+        <a href="../../#facilities" class="nav-link">Ladies</a>
         <a href="../../#membership" class="nav-link">Membership</a>
-        <a href="../../#events" class="nav-link">Events</a>
-        <a href="#" class="nav-link active">Contact</a>
-        <a href="/Pages/Photos/index.html" class="nav-link">Photos</a>
+        <a href="../../#events" class="nav-link">Social</a>
+        <a href="../../Pages/Contacts/index.html" class="nav-link">Contact</a>
+        <a href="#" class="nav-link active">Photos</a>
     </nav>
   </header>
 
   <main>
-    <section class="features-section" id="contact-page">
+    <section class="features-section" id="photo-gallery-page">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-title">Contact & Useful Links</h2>
-          <p id="page-intro" class="section-subtitle"></p>
+          <h2 class="section-title">Photo Gallery</h2>
+          <p class="section-subtitle">A collection of moments from our club's events and history.</p>
         </div>
 
-        <div id="club-contacts-container" class="features-grid">
-            </div>
-
-        <div class="section-header" style="margin-top: 4rem;">
-            <h3 class="section-title">External Links</h3>
-        </div>
-
-        <div id="external-links-container" class="features-grid">
-            </div>
-
+        <div id="photo-gallery-container">
+          </div>
       </div>
     </section>
   </main>
+
+  <div id="lightbox-modal" class="lightbox-modal">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-image">
+    <div id="lightbox-caption"></div>
+  </div>
 
   <footer class="site-footer" id="contact">
     </footer>
   
   <script src="../../script.js"></script>
-  <script src="contacts.js"></script>
+  <script src="photos.js"></script>
 
 </body>
 </html>

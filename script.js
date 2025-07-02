@@ -1,5 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+const yearsOfHistoryElement = document.getElementById('years-of-history');
+    if (yearsOfHistoryElement) {
+        const currentYear = new Date().getFullYear();
+        const yearsOfHistory = currentYear - 1912;
+        yearsOfHistoryElement.textContent = yearsOfHistory;
+    }
+
   // --- Mobile Menu (Hamburger) Logic ---
   const menuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');

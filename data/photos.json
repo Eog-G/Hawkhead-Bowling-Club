@@ -1,0 +1,67 @@
+{
+  "albums": [
+    {
+      "name": "Bowl, BBQ, and Fun Night",
+      "folder": "bowl_bbq_and_fun_night_2019",
+      "date": "2019-08-05",
+      "photos": [
+        {
+          "filename": "1.jpg",
+          "caption": ""
+        },
+        {
+          "filename": "2.jpg",
+          "caption": ""
+        },
+        {
+          "filename": "3.jpg",
+          "caption": ""
+        },
+        {
+          "filename": "4.jpg",
+          "caption": ""
+        },
+        {
+          "filename": "5.jpg",
+          "caption": ""
+        },
+        {
+          "filename": "6.jpg",
+          "caption": ""
+        },
+        {
+          "filename": "7.jpg",
+          "caption": ""
+        },
+        {
+          "filename": "8.jpg",
+          "caption": ""
+        }
+      ]
+    },
+    {
+      "name": "Social Events",
+      "folder": "social_events",
+      "date": "2025-06-15",
+      "photos": [
+        {
+          "filename": "annual_dinner.png",
+          "caption": "Fun at the annual club dinner."
+        },
+        {
+          "filename": "quiz_night.jpg"
+        }
+      ]
+    },
+    {
+      "name": "Opening Day 2025",
+      "folder": "opening_day_2025",
+      "date": "2025-04-12",
+      "photos": [
+        {
+          "filename": "first_bowl.jpg"
+        }
+      ]
+    }
+  ]
+}

@@ -344,6 +344,12 @@ body {
   color: var(--color-green-200); /* MODIFIED */
 }
 
+.stat-icon.why {
+  height: 2rem;
+  width: 2rem;
+  color: var(--color-green-600); /* MODIFIED */
+}
+
 .stat-number {
   font-size: 1.5rem;
   font-weight: 700;
