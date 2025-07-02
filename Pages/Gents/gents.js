@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gentsContentContainer = document.getElementById('gents-content-container');
 
-    // --- HELPER FUNCTIONS for Calendar Events ---
+    // --- HELPER FUNCTIONS ---
     function generateICS(event) {
         const eventDate = new Date(event.date);
         const year = eventDate.getFullYear();
@@ -10,26 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const formattedDate = `${year}${month}${day}`;
         const uid = `${formattedDate}-${event.name.replace(/\s/g, '')}@hawkhead-bowling-club.com`;
         const now = new Date();
-        const dtstamp = now.getUTCFullYear() +
-                      (now.getUTCMonth() + 1).toString().padStart(2, '0') +
-                      now.getUTCDate().toString().padStart(2, '0') + 'T' +
-                      now.getUTCHours().toString().padStart(2, '0') +
-                      now.getUTCMinutes().toString().padStart(2, '0') +
-                      now.getUTCSeconds().toString().padStart(2, '0') + 'Z';
-        const icsContent = [
-            'BEGIN:VCALENDAR',
-            'VERSION:2.0',
-            'PRODID:-//HawkheadBowlingClub//Website//EN',
-            'BEGIN:VEVENT',
-            `UID:${uid}`,
-            `DTSTAMP:${dtstamp}`,
-            `DTSTART;VALUE=DATE:${formattedDate}`,
-            `DTEND;VALUE=DATE:${formattedDate}`,
-            `SUMMARY:${event.name}`,
-            `DESCRIPTION:Event: ${event.name} at Hawkhead Bowling Club`,
-            'END:VEVENT',
-            'END:VCALENDAR'
-        ].join('\n');
+        const dtstamp = now.getUTCFullYear() + (now.getUTCMonth() + 1).toString().padStart(2, '0') + now.getUTCDate().toString().padStart(2, '0') + 'T' + now.getUTCHours().toString().padStart(2, '0') + now.getUTCMinutes().toString().padStart(2, '0') + now.getUTCSeconds().toString().padStart(2, '0') + 'Z';
+        const icsContent = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//HawkheadBowlingClub//Website//EN', 'BEGIN:VEVENT', `UID:${uid}`, `DTSTAMP:${dtstamp}`, `DTSTART;VALUE=DATE:${formattedDate}`, `DTEND;VALUE=DATE:${formattedDate}`, `SUMMARY:${event.name}`, `DESCRIPTION:Event: ${event.name} at Hawkhead Bowling Club`, 'END:VEVENT', 'END:VCALENDAR'].join('\n');
         return icsContent;
     }
 
@@ -43,7 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.removeChild(link);
     }
 
-    // --- Main Fetch and DOM Build ---
+    // ADDED: Helper function to animate cards inside a tab panel
+    function animateResultCards(panelElement) {
+        if (!panelElement) return;
+        const cards = panelElement.querySelectorAll('.result-card');
+        // First, reset the state by removing is-visible
+        cards.forEach(card => {
+            card.classList.remove('is-visible');
+        });
+        // Then, trigger the animation with a delay
+        setTimeout(() => {
+            cards.forEach((card, index) => {
+                card.style.transitionDelay = `${index * 75}ms`;
+                card.classList.add('is-visible');
+            });
+        }, 10); // A small timeout to allow the browser to process the class removal
+    }
+
     const icons = {
         president: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>',
         champion: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline></svg>'
@@ -120,17 +118,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventsSection.appendChild(note);
                 const timelineContainer = document.createElement('div');
                 timelineContainer.className = 'vertical-timeline';
-                
                 const sortedEvents = data.outdoorEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
                 const now = new Date();
                 let nextEventMarked = false; 
-
                 sortedEvents.forEach(event => {
                     const eventDate = new Date(event.date);
                     const isPast = eventDate < now;
                     const item = document.createElement('div');
                     item.className = 'timeline-event';
-                    
                     if (isPast) {
                         item.classList.add('is-past');
                     } else {
@@ -152,31 +147,81 @@ document.addEventListener('DOMContentLoaded', () => {
                 eventsSection.appendChild(timelineContainer);
                 gentsContentContainer.parentElement.appendChild(eventsSection);
             }
-
-            if (data.outdoorResults && data.outdoorResults.competitions.length > 0) {
+            
+            if (data.outdoorResults || data.shortCarpetResults) {
                 const resultsSection = document.createElement('section');
                 resultsSection.className = 'results-section fade-in-up';
-                const title = document.createElement('h3');
-                title.className = 'content-subtitle';
-                title.textContent = `Outdoor Competition Results ${data.outdoorResults.year}`;
-                resultsSection.appendChild(title);
-                const gridContainer = document.createElement('div');
-                gridContainer.className = 'results-grid';
-                data.outdoorResults.competitions.forEach(comp => {
-                    const card = document.createElement('div');
-                    card.className = 'result-card';
-                    let runnerUpHtml = '';
-                    if (comp.runnerUp && comp.runnerUp.length > 0) {
-                        runnerUpHtml = `<div class="result-entry"><div class="result-icon silver"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.477 8.124a.5.5 0 0 0-.707 0L12 10.899l-2.77-2.775a.5.5 0 0 0-.707 0l-1.414 1.414a.5.5 0 0 0 0 .707l2.775 2.77L9.414 15.47a.5.5 0 0 0 0 .707l1.414 1.414a.5.5 0 0 0 .707 0L14.309 14.82l2.77-2.775a.5.5 0 0 0 0-.707l-1.414-1.414z"/><circle cx="12" cy="12" r="10"/></svg></div><div class="result-details"><p class="result-label">Runner(s) Up</p><p class="result-names">${comp.runnerUp.join(', ')}</p></div></div>`;
-                    }
-                    card.innerHTML = `<h4 class="competition-name">${comp.name}</h4><div class="result-entry"><div class="result-icon gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline></svg></div><div class="result-details"><p class="result-label">Winner(s)</p><p class="result-names">${comp.winner.join(', ')}</p></div></div>${runnerUpHtml}`;
-                    gridContainer.appendChild(card);
-                });
-                resultsSection.appendChild(gridContainer);
                 gentsContentContainer.parentElement.appendChild(resultsSection);
+
+                const tabsNav = document.createElement('div');
+                tabsNav.className = 'tabs-nav';
+                resultsSection.appendChild(tabsNav);
+
+                const tabsContent = document.createElement('div');
+                tabsContent.className = 'tabs-content';
+                resultsSection.appendChild(tabsContent);
+                
+                const createResultsGrid = (resultData) => {
+                    if (!resultData || !resultData.competitions) return null;
+                    const gridContainer = document.createElement('div');
+                    gridContainer.className = 'results-grid';
+                    resultData.competitions.forEach(comp => {
+                        const card = document.createElement('div');
+                        card.className = 'result-card fade-in-up'; // ADDED CLASS for animation
+                        let runnerUpHtml = '';
+                        if (comp.runnerUp && comp.runnerUp.length > 0) {
+                            runnerUpHtml = `<div class="result-entry"><div class="result-icon silver"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.477 8.124a.5.5 0 0 0-.707 0L12 10.899l-2.77-2.775a.5.5 0 0 0-.707 0l-1.414 1.414a.5.5 0 0 0 0 .707l2.775 2.77L9.414 15.47a.5.5 0 0 0 0 .707l1.414 1.414a.5.5 0 0 0 .707 0L14.309 14.82l2.77-2.775a.5.5 0 0 0 0-.707l-1.414-1.414z"/><circle cx="12" cy="12" r="10"/></svg></div><div class="result-details"><p class="result-label">Runner(s) Up</p><p class="result-names">${comp.runnerUp.join(', ')}</p></div></div>`;
+                        }
+                        card.innerHTML = `<h4 class="competition-name">${comp.name}</h4><div class="result-entry"><div class="result-icon gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline></svg></div><div class="result-details"><p class="result-label">Winner(s)</p><p class="result-names">${comp.winner.join(', ')}</p></div></div>${runnerUpHtml}`;
+                        gridContainer.appendChild(card);
+                    });
+                    return gridContainer;
+                };
+
+                const resultTypes = [{ key: 'outdoorResults', title: 'Outdoor Results' }, { key: 'shortCarpetResults', title: 'Short Carpet Results' }];
+                
+                resultTypes.forEach((type, index) => {
+                    if (data[type.key]) {
+                        const button = document.createElement('button');
+                        button.className = 'tab-button';
+                        button.textContent = `${type.title} ${data[type.key].year}`;
+                        button.dataset.target = `${type.key}-panel`;
+                        tabsNav.appendChild(button);
+                        const panel = document.createElement('div');
+                        panel.id = `${type.key}-panel`;
+                        panel.className = 'tab-panel';
+                        const grid = createResultsGrid(data[type.key]);
+                        if (grid) panel.appendChild(grid);
+                        tabsContent.appendChild(panel);
+                        if (index === 0) {
+                            button.classList.add('is-active');
+                            panel.classList.add('is-active');
+                        }
+                    }
+                });
+
+                tabsNav.addEventListener('click', (e) => {
+                    if (e.target.matches('.tab-button')) {
+                        tabsNav.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('is-active'));
+                        tabsContent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('is-active'));
+                        e.target.classList.add('is-active');
+                        const targetPanel = document.getElementById(e.target.dataset.target);
+                        if(targetPanel) {
+                            targetPanel.classList.add('is-active');
+                            animateResultCards(targetPanel); // MODIFIED
+                        }
+                    }
+                });
+                
+                // Animate the cards in the initially active tab
+                const initialPanel = tabsContent.querySelector('.tab-panel.is-active');
+                if (initialPanel) {
+                    // Use a timeout to ensure the section is visible before animating
+                    setTimeout(() => animateResultCards(initialPanel), 200);
+                }
             }
             
-            // --- Auto-scroll to next event on desktop ---
+            // --- Auto-scroll and Animation Observer Logic ---
             if (window.innerWidth >= 992) {
                 const timelineContainer = document.querySelector('.vertical-timeline');
                 const nextEventElement = document.getElementById('next-upcoming-event');
@@ -188,7 +233,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // --- Animation Observer ---
             const animatedElements = document.querySelectorAll('.fade-in-up');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {

@@ -67,17 +67,17 @@
   "shortCarpetResults": {
     "year": 2024,
     "competitions": [
-      { "name": "Championship", "winner": ["Winner Name"] },
-      { "name": "Nomination Pairs", "winner": ["Winner 1", "Winner 2"] },
-      { "name": "Ballot pairs", "winner": ["Winner 1", "Winner 2"] },
-      { "name": "Two Bowl Singles", "winner": ["Winner Name"] },
-      { "name": "Two Bowl Ballot Pairs", "winner": ["Winner 1", "Winner 2"] },
-      { "name": "Gartmore Triples", "winner": ["Winner 1", "Winner 2", "Winner 3"] },
-      { "name": "Wappenschaw Aggregate", "winner": ["Winner Name"] },
-      { "name": "Nanaimo Trophy", "winner": ["Winner Name"] },
-      { "name": "Jim Colquhoun Trophy", "winner": ["Winner Name"] },
-      { "name": "Senior Singles", "winner": ["Winner Name"] },
-      { "name": "Senior Nom Pairs", "winner": ["Winner 1", "Winner 2"] }
+      { "name": "Championship", "winner": ["A. Russell"] },
+      { "name": "Nomination Pairs", "winner": ["M. Houston", "A. Russell"] },
+      { "name": "Ballot pairs", "winner": ["S. Dargavel", "R. Porter"] },
+      { "name": "Two Bowl Singles", "winner": ["M. Houston"] },
+      { "name": "Two Bowl Ballot Pairs", "winner": ["S. Dargavel", "R. Porter"] },
+      { "name": "Gartmore Triples", "winner": ["S. Dargavel", "T. McMillan", "D. Bennie"] },
+      { "name": "Wappenschaw Aggregate", "winner": ["M. Pierotti"] },
+      { "name": "Nanaimo Trophy", "winner": ["D. Bennie"] },
+      { "name": "Jim Colquhoun Trophy", "winner": ["D. Sprot","W. Nelson", "R. Porter"] },
+      { "name": "Senior Singles", "winner": ["R. Porter"] },
+      { "name": "Senior Nom Pairs", "winner": ["D. Sprot", "R. Porter"] }
     ]
   }
 }

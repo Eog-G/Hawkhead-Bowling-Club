@@ -302,6 +302,7 @@
     padding: 3rem 1.5rem;
     margin-top: 4rem;
     border-radius: 8px;
+    margin-bottom: 5rem;
 }
 
 /* Make the title white on the dark background */
@@ -324,6 +325,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* ADD THIS LINE */
 }
 
 .competition-name {
@@ -378,4 +380,53 @@
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--color-white);
+}
+
+/* --- Tab Control Styles for Results --- */
+.tabs-nav {
+    display: flex;
+    justify-content: center;
+    gap: 0rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-green-700);
+}
+
+.tab-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-gray-50);
+    opacity: 0.5;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: translateY(1px); /* Aligns with the container's bottom border */
+}
+
+.tab-button:hover {
+    background-color: var(--color-green-800);
+    color: var(--color-white);
+}
+
+.tab-button.is-active {
+    color: var(--color-white);
+    border-bottom-color: var(--color-green-400);
+    opacity: 1;
+}
+
+.tab-panel {
+    display: none; /* Hide all panels by default */
+    animation: fadeIn 0.5s ease;
+}
+
+.tab-panel.is-active {
+    display: block; /* Show only the active panel */
+}
+
+/* A simple fade-in animation for the panels */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
