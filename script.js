@@ -1,5 +1,34 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  const phoneElement = document.getElementById('clubPhone');
+  const emailElement = document.getElementById('clubEmail');
+
+  if (phoneElement && emailElement) {
+        // Use a root-relative path to ensure it works from any page
+        fetch('/data/contacts.json') 
+            .then(response => {
+                if (!response.ok) throw new Error('Network response was not ok');
+                return response.json();
+            })
+            .then(data => {
+                // Find the main phone and email from the contacts data
+                const clubPhone = data.clubContacts.find(contact => contact.name === "Hawkhead BC Phone Number");
+                const clubEmail = data.clubContacts.find(contact => contact.name === "Club Email");
+
+                if (clubPhone) {
+                    phoneElement.textContent = clubPhone.value;
+                }
+                if (clubEmail) {
+                    emailElement.textContent = clubEmail.value;
+                }
+            })
+            .catch(error => {
+                console.error("Failed to load top bar contact info:", error);
+                phoneElement.textContent = 'Error loading';
+                emailElement.textContent = 'Error loading';
+            });
+    }
+
 const yearsOfHistoryElement = document.getElementById('years-of-history');
     if (yearsOfHistoryElement) {
         const currentYear = new Date().getFullYear();

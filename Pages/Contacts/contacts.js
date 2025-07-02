@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const clubContactsContainer = document.getElementById('club-contacts-container');
     const externalLinksContainer = document.getElementById('external-links-container');
 
+    const phoneElement = document.getElementById('clubPhone');
+    const emailElement = document.getElementById('clubEmail');
+
     // --- NEW: Helper function to get an icon based on the contact type ---
     const getIcon = (type) => {
         switch (type) {
@@ -25,6 +28,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
+
+            if (phoneElement && emailElement) {
+                const clubPhone = data.clubContacts.find(contact => contact.name === "Hawkhead BC Phone Number");
+                const clubEmail = data.clubContacts.find(contact => contact.name === "Club Email");
+
+                if (clubPhone) {
+                    phoneElement.textContent = clubPhone.value;
+                }
+                if (clubEmail) {
+                    emailElement.textContent = clubEmail.value;
+                }
+            }
+
             introElement.textContent = data.pageIntro;
 
             // --- MODIFIED: Render the new, detailed club contact cards ---
