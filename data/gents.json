@@ -1,0 +1,68 @@
+{
+  "pageDescription": "The Gents Section has a full playing membership of around 80 who compete in our internal competitions which are run throughout the year. We also have teams who represent the club in the Paisley and District Bowling Association (P&DBA) league and cup competitions, Paisley Veterans Bowling Association (PVBA), as well as the competitions run by the Renfrewshire Bowling Association (RBA) and Bowls Scotland. In addition to the Association competitions we have a full itinerary of domestic competitions and events which are listed below.",
+  "keyPeople": [
+    {
+      "title": "Gents President",
+      "name": "John Doe",
+      "year": "2025"
+    },
+    {
+      "title": "Gents Champion",
+      "name": "Bill Smith",
+      "year": "2024"
+    }
+  ],
+  "committee": [
+    { "role": "President", "name": "John Doe" },
+    { "role": "Vice President", "name": "Peter Jones" },
+    { "role": "Imm Past President", "name": "James Wilson" },
+    { "role": "Secretary", "name": "Alan Brown" },
+    { "role": "Treasurer", "name": "David Miller" },
+    { "role": "Director", "name": "Chris Green" },
+    { "role": "Director", "name": "Mark White" },
+    { "role": "Director", "name": "Paul Black" },
+    { "role": "Director", "name": "Steven Gray" }
+  ],
+  "outdoorEvents": [
+    { "date": "2025-04-12", "name": "Opening Day" },
+    { "date": "2025-05-10", "name": "Club Championship - Round 1" },
+    { "date": "2025-06-01", "name": "Heiton Trophy" },
+    { "date": "2025-07-20", "name": "Presidents Day" },
+    { "date": "2025-08-30", "name": "Championship Finals Weekend" }
+  ],
+  "outdoorResults": {
+    "year": 2024,
+    "competitions": [
+      { "name": "Championship", "winner": ["Bill Smith"], "runnerUp": ["John Doe"] },
+      { "name": "Presidents", "winner": ["Peter Jones"], "runnerUp": ["David Miller"] },
+      { "name": "Heiton", "winner": ["James Wilson"], "runnerUp": ["Alan Brown"] },
+      { "name": "Hellyer", "winner": ["Chris Green"], "runnerUp": ["Mark White"] },
+      { "name": "Watson Trophy (over 55s)", "winner": ["Paul Black"], "runnerUp": ["Steven Gray"] },
+      { "name": "Nomination Pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
+      { "name": "Ballot Pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
+      { "name": "Seniors Nom Pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
+      { "name": "Seniors Championship", "winner": ["Senior Winner"], "runnerUp": ["Senior Runner-up"] },
+      { "name": "Seniors Ballot pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
+      { "name": "Leatherland Triples", "winner": ["Winner 1", "Winner 2", "Winner 3"], "runnerUp": [] },
+      { "name": "G. Forrest Triples", "winner": ["Winner 1", "Winner 2", "Winner 3"], "runnerUp": [] },
+      { "name": "Crawford Miller", "winner": ["Winner 1", "Winner 2", "Winner 3", "Winner 4"], "runnerUp": [] },
+      { "name": "Morton Trophy", "winner": ["Winner 1", "Winner 2", "Winner 3", "Winner 4"], "runnerUp": [] }
+    ]
+  },
+  "shortCarpetResults": {
+    "year": 2024,
+    "competitions": [
+      { "name": "Championship", "winner": ["Winner Name"] },
+      { "name": "Nomination Pairs", "winner": ["Winner 1", "Winner 2"] },
+      { "name": "Ballot pairs", "winner": ["Winner 1", "Winner 2"] },
+      { "name": "Two Bowl Singles", "winner": ["Winner Name"] },
+      { "name": "Two Bowl Ballot Pairs", "winner": ["Winner 1", "Winner 2"] },
+      { "name": "Gartmore Triples", "winner": ["Winner 1", "Winner 2", "Winner 3"] },
+      { "name": "Wappenschaw Aggregate", "winner": ["Winner Name"] },
+      { "name": "Nanaimo Trophy", "winner": ["Winner Name"] },
+      { "name": "Jim Colquhoun Trophy", "winner": ["Winner Name"] },
+      { "name": "Senior Singles", "winner": ["Winner Name"] },
+      { "name": "Senior Nom Pairs", "winner": ["Winner 1", "Winner 2"] }
+    ]
+  }
+}

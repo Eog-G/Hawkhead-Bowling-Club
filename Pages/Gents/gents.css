@@ -1,0 +1,143 @@
+/* Gents Page Specific Styles */
+
+.page-section {
+    padding: 4rem 0;
+    background-color: var(--color-white);
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.key-person-card, .committee-card, .event-item, .result-card {
+    background-color: var(--color-gray-50);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-gray-200);
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0; /* Initial state for animation */
+    animation: cardFadeInUp 0.6s ease-out forwards;
+}
+
+.key-person-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.07);
+}
+
+.key-person-card .title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-green-700);
+}
+
+.key-person-card .name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-gray-900);
+    margin: 0.25rem 0;
+}
+
+.key-person-card .year {
+    font-size: 0.875rem;
+    color: var(--color-gray-500);
+}
+
+.content-wrapper {
+    margin-top: 4rem;
+    opacity: 0; /* Initial state for animation */
+    animation: cardFadeInUp 0.6s ease-out forwards;
+}
+
+.content-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--color-gray-800);
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--color-green-200);
+    padding-bottom: 0.5rem;
+}
+
+.committee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.committee-card {
+    padding: 1rem;
+    text-align: center;
+}
+.committee-card .role {
+    font-weight: 500;
+    color: var(--color-gray-600);
+}
+.committee-card .name {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.event-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+}
+.event-item.is-past {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-500);
+    text-decoration: line-through;
+}
+.event-item .date {
+    font-weight: 600;
+    color: var(--color-green-800);
+}
+.event-item.is-past .date {
+    color: var(--color-gray-500);
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.result-card {
+    padding: 1.25rem;
+}
+
+.result-card .competition {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.result-card .placing {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 0.5rem;
+}
+.result-card .placing-title {
+    font-weight: 600;
+    color: var(--color-gray-600);
+}
+.result-card .placing-names {
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
