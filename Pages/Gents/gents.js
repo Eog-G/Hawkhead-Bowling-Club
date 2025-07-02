@@ -32,52 +32,80 @@ document.addEventListener('DOMContentLoaded', () => {
                         iconHtml = icons.champion;
                         card.id = 'champion-card';
                     }
-                    card.innerHTML = `
-                        <div class="key-person-icon">${iconHtml}</div>
-                        <div class="key-person-details">
-                            <p class="key-person-title">${person.title} - ${person.year}</p>
-                            <p class="key-person-name">${person.name}</p>
-                        </div>
-                    `;
+                    card.innerHTML = `<div class="key-person-icon">${iconHtml}</div><div class="key-person-details"><p class="key-person-title">${person.title} - ${person.year}</p><p class="key-person-name">${person.name}</p></div>`;
                     keyPeopleContainer.appendChild(card);
                 });
                 gentsContentContainer.appendChild(keyPeopleContainer);
             }
-
-            const separator = document.createElement('hr');
-            separator.className = 'content-separator fade-in-up';
-            gentsContentContainer.appendChild(separator);
-
-            // --- 4. Committee Cards (REFACTORED from Table to Cards) ---
+            
             if (data.committee && data.committee.length > 0) {
                 const committeeSection = document.createElement('div');
                 committeeSection.className = 'content-section fade-in-up';
-                
                 const title = document.createElement('h3');
                 title.className = 'content-subtitle';
                 title.textContent = 'Gents Committee 2025';
                 committeeSection.appendChild(title);
-
-                // Create a grid container instead of a table
                 const gridContainer = document.createElement('div');
                 gridContainer.className = 'committee-grid';
-
-                // Create a card for each member
                 data.committee.forEach(member => {
                     const card = document.createElement('div');
                     card.className = 'committee-member-card';
-                    card.innerHTML = `
-                        <p class="member-role">${member.role}</p>
-                        <p class="member-name">${member.name}</p>
-                    `;
+                    card.innerHTML = `<p class="member-role">${member.role}</p><p class="member-name">${member.name}</p>`;
                     gridContainer.appendChild(card);
                 });
-                
                 committeeSection.appendChild(gridContainer);
                 gentsContentContainer.appendChild(committeeSection);
             }
 
-            // --- 5. Intersection Observer for Animations ---
+            // --- REFACTORED: Create and initialize TimelineJS ---
+            if (data.outdoorEvents && data.outdoorEvents.length > 0) {
+                // 1. Create the wrapper section with its own background
+                const eventsSection = document.createElement('section');
+                eventsSection.className = 'events-section fade-in-up';
+                
+                // 2. Add our own heading
+                const title = document.createElement('h3');
+                title.className = 'content-subtitle';
+                title.textContent = '2025 Outdoor Events';
+                eventsSection.appendChild(title);
+
+                // 3. Add the div that the timeline will be built inside
+                const timelineEmbed = document.createElement('div');
+                timelineEmbed.id = 'timeline-embed';
+                eventsSection.appendChild(timelineEmbed);
+
+                // 4. Append the whole new section to the page
+                gentsContentContainer.parentElement.appendChild(eventsSection);
+
+                // 5. Format data for the library
+                const timelineData = {
+                    // We no longer need a title here, as we have our own
+                    events: data.outdoorEvents.map(event => {
+                        const eventDate = new Date(event.date);
+                        return {
+                            start_date: {
+                                year: eventDate.getFullYear(),
+                                month: eventDate.getMonth() + 1,
+                                day: eventDate.getDate()
+                            },
+                            text: {
+                                headline: event.name
+                            }
+                        };
+                    })
+                };
+
+                // 6. Set simplified options
+                const timelineOptions = {
+                    timenav_position: "none", // This is the key to simplifying the look
+                    initial_zoom: 0,
+                    hash_bookmark: false
+                };
+
+                // 7. Create the timeline
+                window.timeline = new TL.Timeline('timeline-embed', timelineData, timelineOptions);
+            }
+
             const animatedElements = document.querySelectorAll('.fade-in-up');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
@@ -98,11 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const championCard = document.getElementById('champion-card');
             if (championCard) {
                 championCard.addEventListener('click', function () {
-                    party.confetti(this, {
-                        count: party.variation.range(40, 60),
-                        size: party.variation.range(0.8, 1.2),
-                        speed: party.variation.range(300, 500),
-                    });
+                    party.confetti(this, { count: party.variation.range(40, 60), size: party.variation.range(0.8, 1.2), speed: party.variation.range(300, 500) });
                 });
             }
         })
