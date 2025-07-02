@@ -1,143 +1,88 @@
-/* Gents Page Specific Styles */
-
-.page-section {
-    padding: 4rem 0;
-    background-color: var(--color-white);
+/* Style for the page introduction text */
+.page-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  text-align: center;
+  max-width: 80ch; /* Limits the line length for better readability */
+  margin: 0 auto 3rem auto; /* Centers the text block and adds space below */
+  color: #333; /* A dark grey for the main text */
 }
 
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    margin-bottom: 3rem;
+/* --- Key People Card Styles --- */
+
+.key-people-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap; /* Allows cards to stack on smaller screens */
+  margin-bottom: 3rem;
 }
 
-.key-person-card, .committee-card, .event-item, .result-card {
-    background-color: var(--color-gray-50);
-    border-radius: 0.5rem;
-    padding: 1.5rem;
-    border: 1px solid var(--color-gray-200);
-    transition: transform 0.3s, box-shadow 0.3s;
-    opacity: 0; /* Initial state for animation */
-    animation: cardFadeInUp 0.6s ease-out forwards;
+.key-person-card {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: var(--color-green-100); /* CHANGED: Was --color-green-50 */
+  padding: 1.5rem;
+  border-radius: 0.75rem; /* 12px */
+  border: 1px solid var(--color-green-200);
+  min-width: 300px;
+  flex: 1;
+  max-width: 350px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .key-person-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.07);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
 }
 
-.key-person-card .title {
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--color-green-700);
+.key-person-icon {
+  flex-shrink: 0;
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  color: var(--color-green-700);
+  border-radius: 50%;
+  border: 2px solid var(--color-green-700);
 }
 
-.key-person-card .name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-gray-900);
-    margin: 0.25rem 0;
+.key-person-icon svg {
+    width: 2rem;
+    height: 2rem;
 }
 
-.key-person-card .year {
-    font-size: 0.875rem;
-    color: var(--color-gray-500);
+.key-person-details {
+  text-align: left;
 }
 
-.content-wrapper {
-    margin-top: 4rem;
-    opacity: 0; /* Initial state for animation */
-    animation: cardFadeInUp 0.6s ease-out forwards;
+.key-person-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--color-green-800);
+  font-weight: 500;
 }
 
-.content-title {
-    font-size: 1.75rem;
-    font-weight: 600;
-    color: var(--color-gray-800);
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--color-green-200);
-    padding-bottom: 0.5rem;
+.key-person-name {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
 }
 
-.committee-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
+/* --- Page Content Animations --- */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.committee-card {
-    padding: 1rem;
-    text-align: center;
-}
-.committee-card .role {
-    font-weight: 500;
-    color: var(--color-gray-600);
-}
-.committee-card .name {
-    font-weight: 600;
-    font-size: 1.125rem;
-}
-
-.events-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.event-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-}
-.event-item.is-past {
-    background-color: var(--color-gray-100);
-    color: var(--color-gray-500);
-    text-decoration: line-through;
-}
-.event-item .date {
-    font-weight: 600;
-    color: var(--color-green-800);
-}
-.event-item.is-past .date {
-    color: var(--color-gray-500);
-}
-
-.results-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-.result-card {
-    padding: 1.25rem;
-}
-
-.result-card .competition {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-}
-
-.result-card .placing {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 1rem;
-    align-items: start;
-    margin-bottom: 0.5rem;
-}
-.result-card .placing-title {
-    font-weight: 600;
-    color: var(--color-gray-600);
-}
-.result-card .placing-names {
-    display: flex;
-    flex-direction: column;
-}
-
-@media (min-width: 768px) {
-    .results-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.fade-in-up.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }

@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gents Section - Hawkhead Bowling Club</title>
-  <meta name="description" content="Information about the Gents Section, including committee, events, and results." />
+  <meta name="description" content="Information for the Gents section of Hawkhead Bowling Club, including committee members, fixtures, and results." />
   
   <link rel="stylesheet" href="../../style.css">
-  <link rel="stylesheet" href="gents.css">
+  <link rel="stylesheet" href="gents.css"> 
   <link rel="icon" href="../../favicon.ico" type="image/x-icon">
 </head>
+
 <body>
 
   <header class="site-header">
@@ -17,33 +19,32 @@
       <div class="container top-bar-content">
         <div class="contact-info">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span>0141 884 2361</span>
+          <span id="clubPhone">-</span>
         </div>
         <div class="contact-info">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-icon"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
-          <span>info@hawkheadbowlingclub.co.uk</span>
+          <span id="clubEmail">-</span>
         </div>
       </div>
     </div>
     <div class="main-header container">
       <div class="logo-area">
         <div class="logo-icon">
-      <img src="../../assets/images/HBCLogo.png" alt="Hawkhead Bowling Club Crest" />
-    </div>
+          <img src="../../assets/images/HBCLogo.png" alt="Hawkhead Bowling Club Crest" />
+        </div>
         <div>
           <h1 class="logo-title">Hawkhead Bowling Club</h1>
           <p class="logo-subtitle">Est. 1912</p>
         </div>
       </div>
       <nav class="desktop-nav">
-        <a href="#home" class="nav-link active">Home</a>
+        <a href="../../index.html" class="nav-link">Home</a>
         <a href="/Pages/Gents/index.html" class="nav-link">Gents</a>
-        <a href="#facilities" class="nav-link">Ladies</a>
-        <a href="#membership" class="nav-link">Social</a>
-        <a href="#events" class="nav-link">Events</a>
+        <a href="/Pages/Ladies/index.html" class="nav-link">Ladies</a>
+        <a href="/Pages/Social/index.html" class="nav-link">Social</a>
+        <a href="/Pages/Events/index.html" class="nav-link">Events</a>
         <a href="/Pages/Contacts/index.html" class="nav-link">Contact</a>
         <a href="/Pages/Photos/index.html" class="nav-link">Photos</a>
-        
       </nav>
       <button id="mobile-menu-button" class="mobile-menu-button">
         <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="menu-icon-svg"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
@@ -51,21 +52,40 @@
       </button>
     </div>
     <nav id="mobile-menu" class="mobile-nav">
-        <a href="#home" class="nav-link active">Home</a>
-      <a href="/Pages/Gents/index.html" class="nav-link">Gents</a>
-      <a href="#facilities" class="nav-link">Ladies</a>
-      <a href="#membership" class="nav-link">Membership</a>
-      <a href="#events" class="nav-link">Social</a>
-      <a href="/Pages/Contacts/index.html" class="nav-link">Contact</a>
-      <a href="/Pages/Photos/index.html" class="nav-link">Photos</a>
+        <a href="../../index.html" class="nav-link">Home</a>
+        <a href="/Pages/Gents/index.html" class="nav-link">Gents</a>
+        <a href="/Pages/Ladies/index.html" class="nav-link">Ladies</a>
+        <a href="/Pages/Social/index.html" class="nav-link">Social</a>
+        <a href="/Pages/Events/index.html" class="nav-link">Events</a>
+        <a href="/Pages/Contacts/index.html" class="nav-link">Contact</a>
+        <a href="/Pages/Photos/index.html" class="nav-link">Photos</a>
     </nav>
   </header>
+
+  <main>
+    <section class="page-section" id="gents-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Gents Section</h2>
+                <p id="page-intro" class="section-subtitle"></p>
+            </div>
+            
+            <div id="gents-content-container">
+
+
+
+
+            </div>
+        </div>
+    </section>
+  </main>
 
 
 
   <footer class="site-footer" id="contact">
     </footer>
   
+  <script src="../../script.js"></script>
   <script src="gents.js"></script>
 
 </body>
