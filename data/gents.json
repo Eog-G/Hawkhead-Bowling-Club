@@ -48,20 +48,20 @@
   "outdoorResults": {
     "year": 2024,
     "competitions": [
-      { "name": "Championship", "winner": ["Bill Smith"], "runnerUp": ["John Doe"] },
-      { "name": "Presidents", "winner": ["Peter Jones"], "runnerUp": ["David Miller"] },
-      { "name": "Heiton", "winner": ["James Wilson"], "runnerUp": ["Alan Brown"] },
-      { "name": "Hellyer", "winner": ["Chris Green"], "runnerUp": ["Mark White"] },
-      { "name": "Watson Trophy (over 55s)", "winner": ["Paul Black"], "runnerUp": ["Steven Gray"] },
-      { "name": "Nomination Pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
-      { "name": "Ballot Pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
-      { "name": "Seniors Nom Pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
-      { "name": "Seniors Championship", "winner": ["Senior Winner"], "runnerUp": ["Senior Runner-up"] },
-      { "name": "Seniors Ballot pairs", "winner": ["Winner 1", "Winner 2"], "runnerUp": ["Runner-up 1", "Runner-up 2"] },
-      { "name": "Leatherland Triples", "winner": ["Winner 1", "Winner 2", "Winner 3"], "runnerUp": [] },
-      { "name": "G. Forrest Triples", "winner": ["Winner 1", "Winner 2", "Winner 3"], "runnerUp": [] },
-      { "name": "Crawford Miller", "winner": ["Winner 1", "Winner 2", "Winner 3", "Winner 4"], "runnerUp": [] },
-      { "name": "Morton Trophy", "winner": ["Winner 1", "Winner 2", "Winner 3", "Winner 4"], "runnerUp": [] }
+      { "name": "Championship", "winner": ["S. Cameron"], "runnerUp": ["K. MacAskill"] },
+      { "name": "Presidents", "winner": ["S. J. Pratt"], "runnerUp": ["S. Cameron"] },
+      { "name": "Heiton", "winner": ["S. Cameron"], "runnerUp": ["D. Bennie"] },
+      { "name": "Hellyer", "winner": ["W. Nelson"], "runnerUp": ["B. Rae"] },
+      { "name": "Watson Trophy (over 55s)", "winner": ["M. Pierotti"], "runnerUp": ["D. Sprotr"] },
+      { "name": "Nomination Pairs", "winner": ["M. Houston", "S. Cameron"], "runnerUp": ["J. Ballie", "T. McMillan"] },
+      { "name": "Ballot Pairs", "winner": ["D. Nelson", "M. Pierotti"], "runnerUp": ["S. J. Pratt", "D. Nelson"] },
+      { "name": "Seniors Nom Pairs", "winner": ["R. Morrow", "N. Rafferty"], "runnerUp": ["J. Ballie", "T. McMillan"] },
+      { "name": "Seniors Championship", "winner": ["R. Porter"], "runnerUp": ["N. Campbell"] },
+      { "name": "Seniors Ballot pairs", "winner": ["A. Storrie", "N. Rafferty"], "runnerUp": ["A. Archibald", "R. Porter"] },
+      { "name": "Leatherland Triples", "winner": ["A. Archibald", "J. Miller", "H. Kerr"], "runnerUp": [] },
+      { "name": "G. Forrest Triples", "winner": ["I. Nicholson", "T. McMillan", "A. McCorkindale"], "runnerUp": [] },
+      { "name": "Crawford Miller", "winner": ["M. Pierotti", "M. Hillin", "M. Ewing", "J. McGroarty"], "runnerUp": [] },
+      { "name": "Morton Trophy", "winner": ["A. Archibald", "I. Waddell", "R. Morrow", "N. Rafferty"], "runnerUp": [] }
     ]
   },
   "shortCarpetResults": {

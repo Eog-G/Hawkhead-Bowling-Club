@@ -1,6 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
     const gentsContentContainer = document.getElementById('gents-content-container');
 
+    // --- HELPER FUNCTIONS for Calendar Events ---
+    function generateICS(event) {
+        const eventDate = new Date(event.date);
+        const year = eventDate.getFullYear();
+        const month = (eventDate.getMonth() + 1).toString().padStart(2, '0');
+        const day = eventDate.getDate().toString().padStart(2, '0');
+        const formattedDate = `${year}${month}${day}`;
+        const uid = `${formattedDate}-${event.name.replace(/\s/g, '')}@hawkhead-bowling-club.com`;
+        const now = new Date();
+        const dtstamp = now.getUTCFullYear() +
+                      (now.getUTCMonth() + 1).toString().padStart(2, '0') +
+                      now.getUTCDate().toString().padStart(2, '0') + 'T' +
+                      now.getUTCHours().toString().padStart(2, '0') +
+                      now.getUTCMinutes().toString().padStart(2, '0') +
+                      now.getUTCSeconds().toString().padStart(2, '0') + 'Z';
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//HawkheadBowlingClub//Website//EN',
+            'BEGIN:VEVENT',
+            `UID:${uid}`,
+            `DTSTAMP:${dtstamp}`,
+            `DTSTART;VALUE=DATE:${formattedDate}`,
+            `DTEND;VALUE=DATE:${formattedDate}`,
+            `SUMMARY:${event.name}`,
+            `DESCRIPTION:Event: ${event.name} at Hawkhead Bowling Club`,
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\n');
+        return icsContent;
+    }
+
+    function downloadToFile(content, filename) {
+        const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // --- Main Fetch and DOM Build ---
     const icons = {
         president: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-check"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>',
         champion: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-award"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline></svg>'
@@ -37,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 gentsContentContainer.appendChild(keyPeopleContainer);
             }
             
-            // --- Separator 1 ---
             const separator1 = document.createElement('hr');
             separator1.className = 'content-separator fade-in-up';
             gentsContentContainer.appendChild(separator1);
@@ -61,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 gentsContentContainer.appendChild(committeeSection);
             }
             
-            // --- Separator 2 ---
             const separator2 = document.createElement('hr');
             separator2.className = 'content-separator fade-in-up';
             gentsContentContainer.appendChild(separator2);
@@ -73,16 +114,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 title.className = 'content-subtitle';
                 title.textContent = '2025 Outdoor Events';
                 eventsSection.appendChild(title);
+                const note = document.createElement('p');
+                note.className = 'timeline-note';
+                note.innerHTML = '💡 Click on any upcoming event to add it to your calendar.';
+                eventsSection.appendChild(note);
                 const timelineContainer = document.createElement('div');
                 timelineContainer.className = 'vertical-timeline';
+                
                 const sortedEvents = data.outdoorEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
                 const now = new Date();
+                let nextEventMarked = false; 
+
                 sortedEvents.forEach(event => {
                     const eventDate = new Date(event.date);
+                    const isPast = eventDate < now;
                     const item = document.createElement('div');
                     item.className = 'timeline-event';
-                    if (eventDate < now) {
+                    
+                    if (isPast) {
                         item.classList.add('is-past');
+                    } else {
+                        item.classList.add('is-clickable');
+                        if (!nextEventMarked) {
+                            item.id = 'next-upcoming-event';
+                            nextEventMarked = true;
+                        }
+                        item.addEventListener('click', () => {
+                            const icsString = generateICS(event);
+                            const filename = `${event.name.replace(/\s/g, '_')}.ics`;
+                            downloadToFile(icsString, filename);
+                        });
                     }
                     const formattedDate = eventDate.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
                     item.innerHTML = `<div class="event-date">${formattedDate}</div><div class="event-name">${event.name}</div>`;
@@ -90,6 +151,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 eventsSection.appendChild(timelineContainer);
                 gentsContentContainer.parentElement.appendChild(eventsSection);
+            }
+
+            if (data.outdoorResults && data.outdoorResults.competitions.length > 0) {
+                const resultsSection = document.createElement('section');
+                resultsSection.className = 'results-section fade-in-up';
+                const title = document.createElement('h3');
+                title.className = 'content-subtitle';
+                title.textContent = `Outdoor Competition Results ${data.outdoorResults.year}`;
+                resultsSection.appendChild(title);
+                const gridContainer = document.createElement('div');
+                gridContainer.className = 'results-grid';
+                data.outdoorResults.competitions.forEach(comp => {
+                    const card = document.createElement('div');
+                    card.className = 'result-card';
+                    let runnerUpHtml = '';
+                    if (comp.runnerUp && comp.runnerUp.length > 0) {
+                        runnerUpHtml = `<div class="result-entry"><div class="result-icon silver"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.477 8.124a.5.5 0 0 0-.707 0L12 10.899l-2.77-2.775a.5.5 0 0 0-.707 0l-1.414 1.414a.5.5 0 0 0 0 .707l2.775 2.77L9.414 15.47a.5.5 0 0 0 0 .707l1.414 1.414a.5.5 0 0 0 .707 0L14.309 14.82l2.77-2.775a.5.5 0 0 0 0-.707l-1.414-1.414z"/><circle cx="12" cy="12" r="10"/></svg></div><div class="result-details"><p class="result-label">Runner(s) Up</p><p class="result-names">${comp.runnerUp.join(', ')}</p></div></div>`;
+                    }
+                    card.innerHTML = `<h4 class="competition-name">${comp.name}</h4><div class="result-entry"><div class="result-icon gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline></svg></div><div class="result-details"><p class="result-label">Winner(s)</p><p class="result-names">${comp.winner.join(', ')}</p></div></div>${runnerUpHtml}`;
+                    gridContainer.appendChild(card);
+                });
+                resultsSection.appendChild(gridContainer);
+                gentsContentContainer.parentElement.appendChild(resultsSection);
+            }
+            
+            // --- Auto-scroll to next event on desktop ---
+            if (window.innerWidth >= 992) {
+                const timelineContainer = document.querySelector('.vertical-timeline');
+                const nextEventElement = document.getElementById('next-upcoming-event');
+                if (timelineContainer && nextEventElement) {
+                    const scrollPosition = nextEventElement.offsetLeft - (timelineContainer.offsetWidth / 2) + (nextEventElement.offsetWidth / 2);
+                    setTimeout(() => {
+                        timelineContainer.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+                    }, 500);
+                }
             }
 
             // --- Animation Observer ---
