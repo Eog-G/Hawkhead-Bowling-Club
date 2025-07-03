@@ -1,0 +1,83 @@
+{
+  "pageDescription": "The Ladies Section has around 40 members and, like the Ladies Section, competes in local and national Association competitions. Competitive matches are played on weekday afternoons, with mixed competitions alongside the Ladies Section at weekends. In winter, the Ladies also enjoy short carpet competitions on weekday afternoons. The current Ladies outdoor champion is Irene McCready, who sadly passed away recently.",
+  "keyPeople": [
+    {
+      "title": "Ladies President",
+      "name": "E. D'Sylva",
+      "year": "2025/2026"
+    },
+    {
+      "title": "Ladies Champion",
+      "name": "Irene McCready",
+      "year": "2025"
+    }
+  ],
+  "committee": [
+    { "role": "President", "name": "E. D'Sylva" },
+    { "role": "Vice President", "name": "" },
+    { "role": "Imm Past President", "name": "M. McGroarty" },
+    { "role": "Secretary", "name": "D. O'Donnell" },
+    { "role": "Treasurer", "name": "E. Spence" },
+    { "role": "Director", "name": "S. Carroll" },
+    { "role": "Director", "name": "L. Gibson" },
+    { "role": "Director", "name": "H. Hindle" },
+    { "role": "Director", "name": "E. Forbes" }
+  ],
+  "outdoorEvents": [
+    { "date": "2025-04-11", "name": "Greens Opening Day" },
+    { "date": "2025-04-15", "name": "Ladies Opening Day" },
+    { "date": "2025-05-01", "name": "Ralston Friendly" },
+    { "date": "2025-05-03", "name": "Mixed Pairs" },
+    { "date": "2025-05-05", "name": "ERLBA Competitions" },
+    { "date": "2025-05-13", "name": "Fletcher Trophy" },
+    { "date": "2025-05-20", "name": "WOSWBA Competitions" },
+    { "date": "2025-05-27", "name": "Jean L Sinclair Trophy" },
+    { "date": "2025-06-03", "name": "Bowls Scotland Charity Wappenschaw" },
+    { "date": "2025-06-06", "name": "Fletcher Final" },
+    { "date": "2025-06-22", "name": "Jubilee Triples" },
+    { "date": "2025-06-26", "name": "VIBS Pairs" },
+    { "date": "2025-07-08", "name": "WOSWBA Charity Wappenschaw" },
+    { "date": "2025-07-24", "name": "Invitation Fours" },
+    { "date": "2025-08-06", "name": "Kenneth Keegan Trophy" },
+    { "date": "2025-08-07", "name": "Meikleriggs Friendly" },
+    { "date": "2025-08-11", "name": "Invitation Triples" },
+    { "date": "2025-08-12", "name": "Open Day" },
+    { "date": "2025-08-19", "name": "Two Bowl Pairs" },
+    { "date": "2025-08-20", "name": "VIBS Singles" },
+    { "date": "2025-08-24", "name": "PWBA Finals" },
+    { "date": "2025-08-26", "name": "ERLBA Charity Wappenschaw" },
+    { "date": "2025-09-02", "name": "Annual Outing" },
+    { "date": "2025-09-08", "name": "MacAskill Trophy" },
+    { "date": "2025-09-14", "name": "Invitation Triples" },
+    { "date": "2025-09-16", "name": "Club Half Yearly General Meeting" },
+    { "date": "2025-09-27", "name": "Closing Day" },
+    { "date": "2025-10-24", "name": "Presentation of Prizes" },
+    { "date": "2025-11-11", "name": "Charity Afternoon" },
+    { "date": "2025-12-16", "name": "Whist and Beetle Drive" },
+    { "date": "2026-02-08", "name": "Short Carpet Fun Game" }
+  ],
+  "outdoorResults": {
+    "year": 2024,
+    "competitions": [
+      { "name": "Championship", "winner": ["I. McCready"], "runnerUp": ["E. Spence"] },
+      { "name": "Presidents", "winner": ["I. McCready"], "runnerUp": ["E. Spence"] },
+      { "name": "Baillie", "winner": ["M. McGroarty"], "runnerUp": ["M. Jamison"] },
+      { "name": "Blainey", "winner": ["K. Burden"], "runnerUp": ["S. Lindsay"] },
+      { "name": "Nomination Pairs", "winner": ["M. Provan", "E. Spence"], "runnerUp": ["J. Williamson", "J. McMinn"] },
+      { "name": "Ballot Pairs", "winner": ["I. McCready", "J. Dinning"], "runnerUp": ["A. McNidder", "E. Speir"] },
+      { "name": "2 Bowl Pairs", "winner": ["M. Jamison", "H. Hindle"], "runnerUp": ["E. Speir", "J. McMinn"] },
+      { "name": "Jubilee Triples", "winner": ["I. McCready", "L. Gibson", "M. Jamison"], "runnerUp": ["J. Dinning", "E. Speir", "E. D'Sylva"] },
+      { "name": "Invitation Triples", "winner": ["S. Welsh", "H. Millikin", "M. McGroarty"], "runnerUp": [] },
+      { "name": "Invitation Fours", "winner": ["Kilbarchan"], "runnerUp": [] },
+      { "name": "Wappenschaw Aggregate", "winner": ["P. Alexander"], "runnerUp": [] }
+    ]
+  },
+  "shortCarpetResults": {
+    "year": 2024,
+    "competitions": [
+      { "name": "Championship", "winner": ["E. Spence"], "runnerUp": ["A. McNidder"] },
+      { "name": "Pairs", "winner": ["E. Speir", "J. Dargavel"], "runnerUp": ["M. Bryan", "E. Spence"] },
+      { "name": "Triples", "winner": ["H. Hindle", "J. Dargavel", "M. McGroarty"], "runnerUp": ["E. Speir", "A. McNidder", "M. Jamison"] }
+    ]
+  }
+}
