@@ -81,11 +81,20 @@
     </section>
   </main>
 
+  <div id="confirmation-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h3 class="modal-title">Application PDF Created</h3>
+      <p class="modal-text">Your application PDF has been created. If your browser prompts you, please save the file to your device. Once saved, click "Continue" to open your email client.</p>
+      <button id="modal-continue-button" class="button button-primary">Continue</button>
+    </div>
+  </div>
+
   <footer class="site-footer" id="contact">
   </footer>
   
   <script src="../../script.js"></script>
   <script src="membership.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 </body>
 </html>

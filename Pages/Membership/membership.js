@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ])
     .then(([membershipData, contactsData]) => {
         
-        const clubEmail = contactsData.clubContacts.find(c => c.name === "Club Email")?.value || 'default-email@example.com';
+        const clubEmail = contactsData.clubContacts.find(c => c.name === "Club Email")?.value || 'hawkheadbowlingclub@hotmail.com';
         const formPath = contactsData.clubContacts.find(c => c.name === "Membership Application")?.value || '#';
         const clubAddress = contactsData.clubContacts.find(c => c.name === "Club Address")?.value;
 
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const submitButton = document.createElement('button');
         submitButton.type = 'submit';
         submitButton.className = 'button button-primary';
-        submitButton.textContent = membershipData.submitButtonText || 'Submit';
+        submitButton.textContent = membershipData.submitButtonText || 'Submit Application';
         
         const buttonWrapper = document.createElement('div');
         buttonWrapper.className = 'form-group';
@@ -146,12 +146,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function initializeFormLogic(clubEmail) {
+        // Get modal elements
+        const confirmationModal = document.getElementById('confirmation-modal');
+        const continueButton = document.getElementById('modal-continue-button');
+        
         const membershipForm = document.getElementById('membership-form');
         const membershipType = document.getElementById('membershipType');
         const playingMemberAgreement = document.getElementById('playingMember-agreement');
         const playingMemberCheckbox = document.getElementById('playingMember');
         const dateField = document.getElementById('date');
         
+        // Variable to store the mailto link after PDF generation
+        let mailtoLink = '';
+
         if (dateField && !dateField.value) {
             const today = new Date();
             const day = String(today.getDate()).padStart(2, '0');
@@ -165,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const selectedType = membershipType.value;
                 if (selectedType === 'Full Playing Lady' || selectedType === 'Full Playing Gent') {
                     playingMemberAgreement.classList.remove('hidden');
-                    playingMemberAgreement.classList.add('instant-show'); // Add class for instant animation
+                    playingMemberAgreement.classList.add('instant-show');
                     playingMemberCheckbox.required = true;
                 } else {
                     playingMemberAgreement.classList.add('hidden');
@@ -175,34 +182,113 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // --- Event Listeners for the Modal ---
+        continueButton.addEventListener('click', () => {
+            confirmationModal.classList.remove('is-visible');
+            if (mailtoLink) {
+                window.location.href = mailtoLink;
+            }
+        });
+
+        confirmationModal.addEventListener('click', (e) => {
+            // Close the modal if the user clicks on the dark overlay
+            if (e.target === confirmationModal) {
+                confirmationModal.classList.remove('is-visible');
+            }
+        });
+
+
         if (membershipForm) {
-            membershipForm.addEventListener('submit', function (e) {
+            membershipForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
                 const formData = new FormData(this);
                 const data = Object.fromEntries(formData.entries());
-                const subject = 'New Membership Application';
-                const body = `
-New Membership Application from the website:
 
-Name of Applicant: ${data.fullName}
-Membership Type: ${data.membershipType}
-E-Signature: ${data.signature}
-Date of Application: ${data.date}
+                try {
+                    const response = await fetch('../../assets/images/HBCLogo.txt');
+                    if (!response.ok) throw new Error('Could not load the club logo file.');
+                    const logoBase64 = await response.text();
+                    
+                    const { jsPDF } = window.jspdf;
+                    const doc = new jsPDF();
 
-Address: ${data.address}
-Postcode: ${data.postcode}
-Email: ${data.email}
-Telephone: ${data.phone}
-Date of Birth: ${data.dob || 'Not provided'}
+                    if (logoBase64.startsWith('data:image')) {
+                        doc.addImage(logoBase64, 'PNG', 15, 10, 30, 30);
+                    }
 
----------------------------------
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(20);
+                    doc.text('Membership Application Form', 105, 25, { align: 'center' });
+                    doc.setFontSize(14);
+                    doc.text('Hawkhead Bowling Club', 105, 35, { align: 'center' });
+                    doc.setLineWidth(0.5);
+                    doc.line(20, 45, 190, 45);
 
-CONFIRMATIONS:
-- I confirm I have never been refused membership of, or expelled from, any Bowls Scotland affiliated club: ${data.expelled ? 'Yes' : 'No'}
-- I agree not to join another affiliated bowling club as a playing member without first resigning from Hawkhead Bowling Club: ${data.playingMember ? 'Yes' : 'N/A'}
-- I consent to my contact details being included in the Club’s internal directory: ${data.directory ? 'Yes' : 'No'}
-                `;
-                window.location.href = `mailto:${clubEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                    let y = 60;
+                    const x_label = 20;
+                    const x_value = 80;
+                    doc.setFontSize(11);
+
+                    const addField = (label, value) => {
+                        doc.setFont('helvetica', 'bold');
+                        doc.text(label, x_label, y);
+                        doc.setFont('helvetica', 'normal');
+                        const lines = doc.splitTextToSize(String(value || 'N/A'), 100);
+                        doc.text(lines, x_value, y);
+                        y += (lines.length * 6) + 4;
+                    };
+
+                    addField('Name of Applicant:', data.fullName);
+                    addField('Membership Type:', data.membershipType);
+                    addField('Date of Application:', data.date);
+                    addField('Address:', data.address);
+                    addField('Postcode:', data.postcode);
+                    addField('Email:', data.email);
+                    addField('Telephone:', data.phone);
+                    addField('Date of Birth:', data.dob || 'Not Provided');
+                    
+                    y += 10;
+                    doc.line(20, y - 5, 190, y - 5);
+
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Declarations & Consent', x_label, y);
+                    y += 8;
+
+                    doc.setFont('helvetica', 'normal');
+                    const declarations = [
+                        `I have never been refused membership or expelled from any bowling club affiliated to Bowls Scotland: ${data.expelled ? 'Yes' : 'No'}`,
+                        `I agree not to join another affiliated bowling club as a playing member without first resigning from \nHawkhead Bowling Club: ${data.playingMember ? 'Yes' : 'N/A'}`,
+                        `I consent to my contact details being included in the Club’s internal directory for members to \narrange ties, competitions, and social events: ${data.directory ? 'Yes' : 'No'}`
+                    ];
+                    declarations.forEach(declaration => {
+                        const lines = doc.splitTextToSize(declaration, 170);
+                        doc.text("•", x_label, y);
+                        doc.text(lines, x_label + 5, y);
+                        y += (lines.length * 5) + 4;
+                    });
+                    
+                    y += 15;
+                    
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Signature:', x_label, y);
+                    doc.setLineWidth(0.2);
+                    doc.line(x_label + 25, y, 150, y);
+
+                    const fileName = `HBC-Membership-Application-${data.fullName.replace(/\s/g, '_')}.pdf`;
+                    doc.save(fileName);
+
+                    // Prepare the mailto link and store it
+                    const subject = `${data.fullName} - Membership Application Form`;
+                    const body = `Hello,\n\nPlease find my completed membership application form attached.\n\nThank you,\n${data.fullName}`;
+                    mailtoLink = `mailto:${clubEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+                    // Show the modal
+                    confirmationModal.classList.add('is-visible');
+
+                } catch (error) {
+                    console.error('Failed to generate PDF:', error);
+                    alert('There was a problem generating the application PDF. Please try again or contact the club directly.');
+                }
             });
         }
     }
