@@ -299,7 +299,7 @@
 /* --- Competition Results Section Styles --- */
 .results-section {
     background-color: var(--color-green-900);
-    padding: 3rem 1.5rem;
+    padding: 1rem 1.5rem;
     margin-top: 4rem;
     border-radius: 8px;
     margin-bottom: 5rem;

@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 committeeSection.className = 'content-section fade-in-up';
                 const title = document.createElement('h3');
                 title.className = 'content-subtitle';
-                title.textContent = 'ladies Committee 2025';
+                title.textContent = 'Ladies Committee 2025';
                 committeeSection.appendChild(title);
                 const gridContainer = document.createElement('div');
                 gridContainer.className = 'committee-grid';
@@ -159,12 +159,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 eventsSection.appendChild(timelineContainer);
                 ladiesContentContainer.parentElement.appendChild(eventsSection);
+
             }
             
+// ADDED: A final separator before the results section
+            const separator3 = document.createElement('hr');
+            separator3.className = 'content-separator fade-in-up';
+            ladiesContentContainer.parentElement.appendChild(separator3);
+
             if (data.outdoorResults || data.shortCarpetResults) {
+
                 const resultsSection = document.createElement('section');
                 resultsSection.className = 'results-section fade-in-up';
                 ladiesContentContainer.parentElement.appendChild(resultsSection);
+
+                // ADDED: A title for the results section
+                const resultsTitle = document.createElement('h3');
+                resultsTitle.className = 'content-subtitle';
+                resultsTitle.textContent = 'Competition Results';
+                resultsSection.appendChild(resultsTitle);
 
                 const tabsNav = document.createElement('div');
                 tabsNav.className = 'tabs-nav';
@@ -181,11 +194,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultData.competitions.forEach(comp => {
                         const card = document.createElement('div');
                         card.className = 'result-card fade-in-up'; // ADDED CLASS for animation
+
+                        // --- NEW: Logic for singular vs. plural labels ---
+                        const winnerLabel = comp.winner.length > 1 ? 'Winners' : 'Winner';
+                        const runnerUpLabel = comp.runnerUp && comp.runnerUp.length > 1 ? 'Runners Up' : 'Runner Up';
+                        // --- END NEW ---
+
                         let runnerUpHtml = '';
                         if (comp.runnerUp && comp.runnerUp.length > 0) {
-                            runnerUpHtml = `<div class="result-entry"><div class="result-icon silver"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.477 8.124a.5.5 0 0 0-.707 0L12 10.899l-2.77-2.775a.5.5 0 0 0-.707 0l-1.414 1.414a.5.5 0 0 0 0 .707l2.775 2.77L9.414 15.47a.5.5 0 0 0 0 .707l1.414 1.414a.5.5 0 0 0 .707 0L14.309 14.82l2.77-2.775a.5.5 0 0 0 0-.707l-1.414-1.414z"/><circle cx="12" cy="12" r="10"/></svg></div><div class="result-details"><p class="result-label">Runner(s) Up</p><p class="result-names">${comp.runnerUp.join(', ')}</p></div></div>`;
+                            runnerUpHtml = `
+                                <div class="result-entry">
+                                    <div class="result-icon silver">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.477 8.124a.5.5 0 0 0-.707 0L12 10.899l-2.77-2.775a.5.5 0 0 0-.707 0l-1.414 1.414a.5.5 0 0 0 0 .707l2.775 2.77L9.414 15.47a.5.5 0 0 0 0 .707l1.414 1.414a.5.5 0 0 0 .707 0L14.309 14.82l2.77-2.775a.5.5 0 0 0 0-.707l-1.414-1.414z"/><circle cx="12" cy="12" r="10"/></svg>
+                                    </div>
+                                    <div class="result-details">
+                                        <p class="result-label">${runnerUpLabel}</p>
+                                        <p class="result-names">${comp.runnerUp.join(', ')}</p>
+                                    </div>
+                                </div>`;
                         }
-                        card.innerHTML = `<h4 class="competition-name">${comp.name}</h4><div class="result-entry"><div class="result-icon gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline></svg></div><div class="result-details"><p class="result-label">Winner(s)</p><p class="result-names">${comp.winner.join(', ')}</p></div></div>${runnerUpHtml}`;
+                        card.innerHTML = `
+                            <h4 class="competition-name">${comp.name}</h4>
+                            <div class="result-entry">
+                                <div class="result-icon gold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 17 17 23 15.79 13.88"></polyline></svg>
+                                </div>
+                                <div class="result-details">
+                                    <p class="result-label">${winnerLabel}</p>
+                                    <p class="result-names">${comp.winner.join(', ')}</p>
+                                </div>
+                            </div>
+                            ${runnerUpHtml}`;
                         gridContainer.appendChild(card);
                     });
                     return gridContainer;
