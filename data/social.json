@@ -1,0 +1,89 @@
+{
+  "pageTitle": "Social Events",
+  "pageIntro": "There's more to Hawkhead than just bowling! Our club has a vibrant social scene with events running throughout the year. Everyone is welcome.",
+  "keyContacts": [
+    {
+      "role": "Social Convener",
+      "name": "Michael Pierotti"
+    },
+    {
+      "role": "Ticket Agent",
+      "name": "Ellven Forbes"
+    },
+    {
+      "role": "Ticket Agent",
+      "name": "Douglas Carruth"
+    },
+    {
+      "role": "Ticket Agent",
+      "name": "Michael Pierotti"
+    }
+  ],
+  "barOpeningTimes": {
+    "summer": {
+      "period": "Summer",
+      "times": [
+        { "day": "Monday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
+        { "day": "Tuesday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
+        { "day": "Wednesday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
+        { "day": "Thursday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
+        { "day": "Friday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
+        { "day": "Saturday", "hours": ["14:00 - 17:30", "19:00 - 23:00 (Functions only)"] },
+        { "day": "Sunday", "hours": ["14:00 - 17:30", "Closed"] }
+      ]
+    },
+    "winter": {
+      "period": "Winter",
+      "times": [
+        { "day": "Monday", "hours": ["Closed", "19:00 - 23:00"] },
+        { "day": "Tuesday", "hours": ["Closed", "19:00 - 23:00"] },
+        { "day": "Wednesday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
+        { "day": "Thursday", "hours": ["Closed", "Closed"] },
+        { "day": "Friday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
+        { "day": "Saturday", "hours": ["14:00 - 17:30", "19:00 - 23:00 (Functions only)"] },
+        { "day": "Sunday", "hours": ["14:00 - 17:30", "Closed"] }
+      ]
+    }
+  },
+  "socialEvents": {
+    "year": 2025,
+    "events": [
+      {
+        "date": "2025-04-12",
+        "name": "Opening Cabaret"
+      },
+      {
+        "date": "2025-05-24",
+        "name": "Fun Night"
+      },
+      {
+        "date": "2025-06-21",
+        "name": "Cabaret - Dolly Parton / Shania Twain"
+      },
+      {
+        "date": "2025-07-19",
+        "name": "Cabaret - Fun Night"
+      },
+      {
+        "date": "2025-08-16",
+        "name": "Cabaret - Blues Brothers"
+      },
+      {
+        "date": "2025-10-04",
+        "name": "Cabaret - Dynamix 80s"
+      },
+      {
+        "date": "2025-11-03",
+        "name": "Fun Night"
+      },
+      {
+        "date": "2025-11-22",
+        "name": "Cheese & Wine"
+      },
+      {
+        "date": "2025-12-20",
+        "name": "Xmas Dance"
+      }
+    ]
+  }
+}
