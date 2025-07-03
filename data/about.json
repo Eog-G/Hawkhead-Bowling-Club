@@ -1,0 +1,65 @@
+{
+  "title": "About Hawkhead Bowling Club",
+  "subtitle": "Our History, Our Community, Our Passion",
+  "sections": [
+    {
+      "type": "intro",
+      "title": "Who We Are",
+      "image": "clubhouse.jpg",
+      "content": "Founded in 1921, Hawkhead Bowling Club has deep roots in the local community. Originally named Hawkhead Recreation Club, it hosted multiple sports until 1963, when bowling became the main focus and the club adopted its current name. Today, we have two full-size greens and excellent clubhouse facilities, including a lounge, a large hall, and a small function suite.<br><br>Hawkhead is an equal opportunities club — all full playing members, ladies and gents, enjoy the same rights. The club is managed by an Executive Committee, which oversees the facilities, finances, and memberships. Bowling matters are handled by our three dedicated sections: Gents, Ladies, and Juniors (the Junior Section launched in 2007)."
+    },
+    {
+      "type": "affiliations",
+      "title": "Our Affiliations",
+      "items": [
+        {
+          "name": "Gents Section",
+          "body": "Affiliated to Bowls Scotland, Renfrewshire Bowling Association (RBA), and Paisley & District Bowling Association (P&DBA)."
+        },
+        {
+          "name": "Ladies Section",
+          "body": "Affiliated to Bowls Scotland, East Renfrewshire Ladies Bowling Association (ERLBA), and West of Scotland Women’s Bowling Association (WOSWBA)."
+        },
+        {
+          "name": "Seniors",
+          "body": "The Paisley Veterans Bowling Association (PVBA) runs the majority of the Gents Seniors leagues and cups."
+        }
+      ]
+    },
+    {
+        "type": "intro",
+        "title": "Social Events & Facilities",
+        "content": "We host regular social events featuring live entertainment and welcome private functions for members and their guests. Our main hall accommodates up to 120 people and is popular for family celebrations — however, we do not host 18th birthday parties. All hall bookings must be made through a member and are approved by the Executive Committee."
+    },
+    {
+      "type": "history",
+      "title": "A Proud History",
+      "events": [
+        {
+          "year": "1920",
+          "description": "The club’s story began in October, when a small group of Paisley men met at Thomas White & Sons’ Laighpark Engineering Works. Inspired by the company’s Industrial Welfare Scheme, they secured ground at Ralston Estate, creating a community space with two football pitches, a cricket pitch, and two bowling greens."
+        },
+        {
+          "year": "1921",
+          "description": "On 21 May, the Hawkhead Recreation Club officially opened. Thomas White, the company’s Honorary President, performed the opening ceremony with a silver key, while Mrs White unveiled the bowling greens with a silver jack. The day was marked by family races, live music from the Johnstone Silver Band, and the first games on the new greens."
+        },
+        {
+          "year": "1963",
+          "description": "Bowling quickly became the club’s main sport, and by the 1960s, membership had grown beyond Thomas White & Sons’ employees to bowlers from across Paisley. In 1963, the club formally became Hawkhead Bowling Club."
+        },
+        {
+          "year": "1970",
+          "description": "In 1969, the company offered to sell the grounds to the club for £12,000. Thanks to a grant from the Scottish Sports Council and interest-free loans from members, the purchase was completed in 1970 — making Hawkhead Bowling Club fully independent for the first time."
+        },
+        {
+            "year": "1978",
+            "description": "As membership grew, the club continued to invest in its facilities. Highlights included demolishing the old bowls house (originally a football pavilion), adding a large car park, and extending the clubhouse. This new extension was officially opened on 15 April by Honorary President Peter Watt."
+        },
+        {
+            "year": "2021",
+            "description": "Hawkhead reached its centenary in 2021. Although COVID-19 delayed major celebrations until 2022, a flag-raising event was held on 7 August 2021 to unveil our new Centenary flag. Over 70 members, including Honorary President Matt Paul, joined the occasion and enjoyed a friendly mixed triples game to mark the milestone."
+        }
+      ]
+    }
+  ]
+}
