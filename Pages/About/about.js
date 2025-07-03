@@ -22,9 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 block.appendChild(title);
 
                 if (sectionData.type === 'intro') {
+                    // ** ADDED CODE START **
+                    // Check if an image is specified in the JSON data
+                    if (sectionData.image) {
+                        const image = document.createElement('img');
+                        // Construct the correct relative path to the image
+                        image.src = `../../assets/images/${sectionData.image}`;
+                        image.alt = sectionData.title; // Use the title for alt text
+                        image.className = 'about-image'; // Apply styling from about.css
+                        block.appendChild(image);
+                    }
+                    // ** ADDED CODE END **
+
                     const content = document.createElement('p');
                     content.innerHTML = sectionData.content;
                     block.appendChild(content);
+
                 } else if (sectionData.type === 'affiliations') {
                     const grid = document.createElement('div');
                     grid.className = 'affiliations-grid';
