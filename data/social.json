@@ -38,7 +38,7 @@
         { "day": "Monday", "hours": ["Closed", "19:00 - 23:00"] },
         { "day": "Tuesday", "hours": ["Closed", "19:00 - 23:00"] },
         { "day": "Wednesday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
-        { "day": "Thursday", "hours": ["Closed", "Closed"] },
+        { "day": "Thursday", "hours": ["Closed"] },
         { "day": "Friday", "hours": ["14:00 - 17:30", "19:00 - 23:00"] },
         { "day": "Saturday", "hours": ["14:00 - 17:30", "19:00 - 23:00 (Functions only)"] },
         { "day": "Sunday", "hours": ["14:00 - 17:30", "Closed"] }

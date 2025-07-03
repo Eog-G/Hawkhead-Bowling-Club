@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const clubContactsContainer = document.getElementById('club-contacts-container');
     const externalLinksContainer = document.getElementById('external-links-container');
 
-    // --- NEW: Helper function to get an icon based on the contact type ---
     const getIcon = (type) => {
         switch (type) {
             case 'phone':
@@ -14,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>';
             case 'download':
                 return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>';
+            case 'address':
+                return '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path><circle cx="12" cy="10" r="3"></circle></svg>';
             default:
                 return '';
         }
@@ -28,47 +29,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
             introElement.textContent = data.pageIntro;
 
-            // --- MODIFIED: Render the new, detailed club contact cards ---
-            clubContactsContainer.innerHTML = ''; 
+            clubContactsContainer.innerHTML = '';
             data.clubContacts.forEach(contact => {
-                let linkHtml = '';
+                let valueHtml = '';
                 if (contact.type === 'phone') {
-                    linkHtml = `<a href="tel:${contact.value}" class="contact-card-value">${contact.value}</a>`;
+                    valueHtml = `<a href="tel:${contact.value}" class="contact-card-value">${contact.value}</a>`;
                 } else if (contact.type === 'email') {
-                    linkHtml = `<a href="mailto:${contact.value}" class="contact-card-value">${contact.value}</a>`;
+                    valueHtml = `<a href="mailto:${contact.value}" class="contact-card-value">${contact.value}</a>`;
                 } else if (contact.type === 'link') {
-                    linkHtml = `<a href="${contact.value}" target="_blank" rel="noopener noreferrer" class="contact-card-value">Visit Page</a>`;
+                    valueHtml = `<a href="${contact.value}" target="_blank" rel="noopener noreferrer" class="contact-card-value">Visit Page</a>`;
                 } else if (contact.type === 'download') {
-                    linkHtml = `<a href="${contact.value}" download class="contact-card-value">Download Form</a>`;
+                    valueHtml = `<a href="${contact.value}" download class="contact-card-value">Download Form</a>`;
+                } else if (contact.type === 'address') {
+                    const displayAddress = contact.value.replace(/\n/g, ', ');
+                    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.value)}`;
+                    valueHtml = `<a href="${mapsUrl}" target="_blank" rel="noopener noreferrer" class="contact-card-value">${displayAddress}</a>`;
                 }
 
-                const contactCardHtml = `
-                    <div class="contact-card">
-                        <div class="contact-card-icon">
-                            ${getIcon(contact.type)}
-                        </div>
-                        <div class="contact-card-content">
-                            <h3 class="contact-card-title">${contact.name}</h3>
-                            ${linkHtml}
-                        </div>
+                const contactCard = document.createElement('div');
+                contactCard.className = 'contact-card';
+                contactCard.innerHTML = `
+                    <div class="contact-card-icon">
+                        ${getIcon(contact.type)}
+                    </div>
+                    <div class="contact-card-content">
+                        <h3 class="contact-card-title">${contact.name}</h3>
+                        ${valueHtml}
                     </div>
                 `;
-                clubContactsContainer.innerHTML += contactCardHtml;
+                clubContactsContainer.appendChild(contactCard);
             });
 
-            // Render the external links (they already use a suitable card format)
             externalLinksContainer.innerHTML = '';
             data.externalLinks.forEach(link => {
-                const linkCard = `
-                    <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="feature-card" style="text-decoration: none;">
-                        <div class="feature-icon-wrapper">
-                           ${getIcon('link')}
-                        </div>
-                        <h3 class="feature-title" style="text-align: center;">${link.name}</h3>
-                    </a>
+                const linkCard = document.createElement('a');
+                linkCard.className = 'feature-card';
+                linkCard.href = link.url;
+                linkCard.target = '_blank';
+                linkCard.rel = 'noopener noreferrer';
+                linkCard.style.textDecoration = 'none';
+                linkCard.innerHTML = `
+                    <div class="feature-icon-wrapper">
+                       ${getIcon('link')}
+                    </div>
+                    <h3 class="feature-title" style="text-align: center;">${link.name}</h3>
                 `;
-                externalLinksContainer.innerHTML += linkCard;
+                externalLinksContainer.appendChild(linkCard);
             });
+
+            // --- Animate all cards on scroll ---
+            const cards = document.querySelectorAll('.contact-card, .feature-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(cards).indexOf(entry.target);
+                        entry.target.style.transitionDelay = `${index * 100}ms`;
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => observer.observe(card));
+
         })
         .catch(error => {
             console.error("Error fetching or processing contacts data:", error);
