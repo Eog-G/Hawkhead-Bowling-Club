@@ -2,7 +2,7 @@
   "pageIntro": "Below are contacts within the club and some useful external links. Click on the links to access the sites.",
   "clubContacts": [
     {
-      "name": "Hawkhead BC Phone Number",
+      "name": "Hawkhead Bowling Club Phone Number",
       "value": "0141 561 7040",
       "type": "phone"
     },
@@ -25,6 +25,11 @@
       "name": "Membership Application",
       "value": "/assets/forms/membership-form.rtf",
       "type": "download"
+    },
+    {
+      "name": "Club Address",
+      "value": "8 Gartmore Rd\nPaisley\nPA1 3NQ",
+      "type": "address"
     }
   ],
   "externalLinks": [

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return response.json();
       })
       .then(data => {
-        const clubPhone = data.clubContacts.find(contact => contact.name === "Hawkhead BC Phone Number");
+        const clubPhone = data.clubContacts.find(contact => contact.name === "Hawkhead Bowling Club Phone Number");
         const clubEmail = data.clubContacts.find(contact => contact.name === "Club Email");
 
         if (clubPhone) phoneElement.textContent = clubPhone.value;

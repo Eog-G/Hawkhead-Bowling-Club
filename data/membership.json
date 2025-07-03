@@ -1,0 +1,90 @@
+{
+    "pageTitle": "Membership Application - Hawkhead Bowling Club",
+    "pageDescription": "Join Hawkhead Bowling Club by filling out our online membership application form.",
+    "formHeader": "Become a Member",
+    "formSubheader": "Join our community by filling out the application form below.",
+    "fields": [
+        {
+            "name": "fullName",
+            "label": "Name of Applicant",
+            "type": "text",
+            "required": true
+        },
+        {
+            "name": "membershipType",
+            "label": "Type of Membership",
+            "type": "select",
+            "required": true,
+            "placeholder": "Select membership type...",
+            "options": [
+                "Full Playing Lady",
+                "Associate Lady",
+                "Junior",
+                "Full Playing Gent",
+                "Associate Gent"
+            ]
+        },
+        {
+            "name": "date",
+            "label": "Today's Date",
+            "type": "text",
+            "readonly": true
+        },
+        {
+            "name": "address",
+            "label": "Address",
+            "type": "textarea",
+            "required": true,
+            "rows": 3
+        },
+        {
+            "name": "postcode",
+            "label": "Postcode",
+            "type": "text",
+            "required": true
+        },
+        {
+            "name": "email",
+            "label": "Email Address",
+            "type": "email",
+            "required": true
+        },
+        {
+            "name": "phone",
+            "label": "Telephone Number",
+            "type": "tel",
+            "required": true
+        },
+        {
+            "name": "dob",
+            "label": "Date of Birth (Optional)",
+            "type": "date"
+        },
+        {
+            "type": "separator"
+        },
+        {
+            "name": "expelled",
+            "label": "I confirm I have never been refused membership of, or expelled from, any Bowls Scotland affiliated club.",
+            "type": "checkbox",
+            "required": true
+        },
+        {
+            "name": "directory",
+            "label": "I consent to my contact details being included in the Club’s internal directory for members to arrange ties, competitions, and social events.",
+            "type": "checkbox"
+        },
+        {
+            "name": "playingMember",
+            "label": "I agree not to join another affiliated bowling club as a playing member without first resigning from Hawkhead Bowling Club.",
+            "type": "checkbox",
+            "conditionalOn": ["Full Playing Lady", "Full Playing Gent"]
+        }
+    ],
+    "submitButtonText": "Submit Application",
+    "downloadSection": {
+        "header": "Prefer to Apply by Post?",
+        "text": "You can download the membership form, print it, and post it to us.",
+        "buttonText": "Download Application Form"
+    }
+}
