@@ -752,3 +752,53 @@ body {
 .material-symbols-outlined {
     font-size: 2.1rem !important;
 }
+
+/* Removes the default underline from the new logo link */
+.logo-link {
+    text-decoration: none;
+}
+
+.custom-shape-divider-top-1751552247 {
+    position: absolute;
+    bottom: 0; /* UPDATED: This positions the divider at the bottom */
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    /* REMOVED the rotate transform as it's no longer needed */
+}
+
+.custom-shape-divider-top-1751552247 svg {
+    position: relative;
+    display: block;
+    width: calc(155% + 1.3px);
+    height: 59px;
+}
+
+.custom-shape-divider-top-1751552247 .shape-fill {
+    fill: #FFFFFF; /* This will fill the shape with white */
+}
+
+.footer-shape-divider {
+    /* This negative margin pulls the shape up to overlap the section above it */
+    margin-top: -1px;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    /* This flips the shape to curve downwards */
+    transform: rotate(180deg);
+}
+
+.footer-shape-divider svg {
+    position: relative;
+    display: block;
+    width: calc(141% + 1.3px);
+    height: 100px;
+    transform: rotate(180deg);
+    height: 2rem;
+}
+
+.footer-shape-divider .shape-fill {
+    /* This sets the color to match your dark green footer */
+    fill: var(--color-green-900);
+}
