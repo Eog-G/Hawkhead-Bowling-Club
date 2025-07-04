@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (socialData.socialEvents && socialData.socialEvents.events.length > 0) {
             const eventsSection = document.createElement('section');
             eventsSection.className = 'events-section fade-in-up';
+            // --- ADDED ID FOR ANCHOR LINK ---
+            eventsSection.id = 'social-events-timeline'; 
             const title = document.createElement('h3');
             title.className = 'content-subtitle';
             title.textContent = `Social Events ${socialData.socialEvents.year}`;
