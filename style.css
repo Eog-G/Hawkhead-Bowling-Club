@@ -741,3 +741,32 @@ a.news-card-anchor:hover {
     font-weight: 500;
     text-decoration: none;
 }
+
+/* --- Equal Height Event Cards --- */
+
+/* Ensure the anchor tag and the card within it fill the entire grid cell */
+a.news-card-anchor,
+.news-card {
+    height: 100%;
+}
+
+/* We'll use Flexbox to control the layout of the card's content */
+.news-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.news-card-content {
+    display: flex;
+    flex-direction: column;
+    /* This makes the content area grow to fill all available vertical space */
+    flex-grow: 1;
+}
+
+.news-card-excerpt {
+    /* This makes the description take up any extra empty space,
+       pushing the link text down to the bottom of the card */
+    flex-grow: 1;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
+}

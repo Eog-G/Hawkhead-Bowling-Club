@@ -229,8 +229,9 @@ const loadUpcomingEvents = async () => {
                     'Gents': 'assets/images/events/defaults/singles-gents.jpg',
                     'Ladies': 'assets/images/events/defaults/singles-ladies.jpg'
                 },
-                'cabaret': {
-                    'Social': 'assets/images/events/defaults/cabaret-social.jpg'
+                'fours': {
+                  'Gents': 'assets/images/events/defaults/fours-gents.jpg',
+                  'Ladies': 'assets/images/events/defaults/fours-ladies.jpg'
                 },
                 'cheese': {
                     'Social': 'assets/images/events/defaults/wine-and-cheese.jpg'
