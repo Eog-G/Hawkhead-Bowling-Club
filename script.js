@@ -154,5 +154,166 @@ document.addEventListener('DOMContentLoaded', () => {
       observer.observe(card);
     });
   }
-});
 
+// --- 4. Load Upcoming Events on Homepage ---
+const loadUpcomingEvents = async () => {
+    const newsGrid = document.querySelector('.news-grid');
+    if (!newsGrid) {
+        return;
+    }
+
+    try {
+        const [gentsRes, ladiesRes, socialRes] = await Promise.all([
+            fetch('/data/gents.json'),
+            fetch('/data/ladies.json'),
+            fetch('/data/social.json')
+        ]);
+
+        if (!gentsRes.ok || !ladiesRes.ok || !socialRes.ok) {
+            throw new Error('Failed to fetch one or more event data files.');
+        }
+
+        const gentsData = await gentsRes.json();
+        const ladiesData = await ladiesRes.json();
+        const socialData = await socialRes.json();
+
+        const gentsEvents = gentsData.outdoorEvents.map(event => ({ ...event, type: 'Gents', link: '/Pages/Gents/index.html#gents-events-timeline' }));
+        const ladiesEvents = ladiesData.outdoorEvents.map(event => ({ ...event, type: 'Ladies', link: '/Pages/Ladies/index.html#ladies-events-timeline' }));
+        const socialEvents = socialData.socialEvents.events.map(event => ({ ...event, type: 'Social', link: '/Pages/Social/index.html#social-events-timeline' }));
+
+        const allEvents = [...gentsEvents, ...ladiesEvents, ...socialEvents];
+
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const upcomingEvents = allEvents
+            .filter(event => new Date(event.date) >= today)
+            .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+        const nextThreeEvents = upcomingEvents.slice(0, 3);
+        newsGrid.innerHTML = '';
+
+        if (nextThreeEvents.length === 0) {
+            newsGrid.innerHTML = '<p style="text-align: center; width: 100%;">No upcoming events scheduled. Please check back soon!</p>';
+            return;
+        }
+
+        // *** UPDATED: Comprehensive Default Image Mapping ***
+        // All these image paths point to the 'assets/images/events/defaults/' folder.
+        const defaultImages = {
+            // Tier 3: Final fallback images
+            section: {
+                'Gents': 'assets/images/events/defaults/gents.jpg',
+                'Ladies': 'assets/images/events/defaults/ladies.jpg',
+                'Social': 'assets/images/events/defaults/social.jpg'
+            },
+            // Tier 2: Keyword-based default images
+            keyword: {
+                'trophy': {
+                    'Gents': 'assets/images/events/defaults/trophy-gents.jpg',
+                    'Ladies': 'assets/images/events/defaults/trophy-ladies.jpg'
+                },
+                'friendly': {
+                    'Gents': 'assets/images/events/defaults/friendly-gents.jpg',
+                    'Ladies': 'assets/images/events/defaults/friendly-ladies.jpg'
+                },
+                'triples': {
+                    'Gents': 'assets/images/events/defaults/triples-gents.jpg',
+                    'Ladies': 'assets/images/events/defaults/triples-ladies.jpg'
+                },
+                'pairs': {
+                    'Gents': 'assets/images/events/defaults/pairs-gents.jpg',
+                    'Ladies': 'assets/images/events/defaults/pairs-ladies.jpg'
+                },
+                'singles': {
+                    'Gents': 'assets/images/events/defaults/singles-gents.jpg',
+                    'Ladies': 'assets/images/events/defaults/singles-ladies.jpg'
+                },
+                'cabaret': {
+                    'Social': 'assets/images/events/defaults/cabaret-social.jpg'
+                },
+                'cheese': {
+                    'Social': 'assets/images/events/defaults/wine-and-cheese.jpg'
+                },
+                'xmas': {
+                    'Social': 'assets/images/events/defaults/xmas-social.jpg'
+                },
+                'christmas': {
+                    'Social': 'assets/images/events/defaults/xmas-social.jpg' // Also catches "Christmas"
+                }
+            }
+        };
+        
+        // Helper function to determine the correct image URL based on the 3-tier logic
+        function getEventImageUrl(event) {
+            // Tier 1: Check for a specific custom image in the JSON
+            if (event.image) {
+                return `assets/images/events/custom/${event.type.toLowerCase()}/${event.image}`;
+            }
+
+            // Tier 2: Check for a keyword-based image
+            const eventNameLower = event.name.toLowerCase();
+            for (const keyword in defaultImages.keyword) {
+                if (eventNameLower.includes(keyword)) {
+                    const keywordMapping = defaultImages.keyword[keyword];
+                    if (keywordMapping[event.type]) {
+                        return keywordMapping[event.type];
+                    }
+                    if (keywordMapping['default']) {
+                        return keywordMapping['default'];
+                    }
+                }
+            }
+
+            // Tier 3: Use the final section fallback
+            return defaultImages.section[event.type];
+        }
+
+        nextThreeEvents.forEach(event => {
+            const eventDate = new Date(event.date);
+            const formattedDate = eventDate.toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+
+            const imageUrl = getEventImageUrl(event);
+            const description = event.description || `This is an event for the <strong>${event.type} Section</strong>.`;
+
+            const anchor = document.createElement('a');
+            anchor.href = event.link;
+            anchor.className = 'news-card-anchor';
+
+            const card = document.createElement('article');
+            card.className = 'news-card';
+            
+            card.innerHTML = `
+                <img src="${imageUrl}" alt="${event.name}" class="news-card-image">
+                <div class="news-card-content">
+                    <div class="news-card-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="news-card-icon"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        <span>${formattedDate}</span>
+                    </div>
+                    <h3 class="news-card-title">${event.name}</h3>
+                    <p class="news-card-excerpt">${description}</p> 
+                    <div class="news-card-link-text">
+                        Go to ${event.type} Section 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </div>
+                </div>
+            `;
+            
+            anchor.appendChild(card);
+            newsGrid.appendChild(anchor);
+        });
+
+    } catch (error) {
+        console.error('Error loading upcoming events:', error);
+        if(newsGrid) newsGrid.innerHTML = '<p>Could not load upcoming events. Please try again later.</p>';
+    }
+};
+
+  // Run the function to load events
+  loadUpcomingEvents();
+
+});

@@ -24,22 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
         link.click();
         document.body.removeChild(link);
     }
-
-    // ADDED: Helper function to animate cards inside a tab panel
+    
     function animateResultCards(panelElement) {
         if (!panelElement) return;
         const cards = panelElement.querySelectorAll('.result-card');
-        // First, reset the state by removing is-visible
         cards.forEach(card => {
             card.classList.remove('is-visible');
         });
-        // Then, trigger the animation with a delay
         setTimeout(() => {
             cards.forEach((card, index) => {
                 card.style.transitionDelay = `${index * 75}ms`;
                 card.classList.add('is-visible');
             });
-        }, 10); // A small timeout to allow the browser to process the class removal
+        }, 10);
     }
 
     const icons = {
@@ -94,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.committee.forEach(member => {
                     const card = document.createElement('div');
                     card.className = 'committee-member-card';
-                    // NEW: Check if the name is empty
                     if (!member.name || member.name.trim() === '') {
                         card.classList.add('is-vacant');
                         card.innerHTML = `
@@ -102,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="member-name">Vacant</p>
                         `;
                     } else {
-                        // This is the original logic for members with a name
                         card.innerHTML = `
                             <p class="member-role">${member.role}</p>
                             <p class="member-name">${member.name}</p>
@@ -121,6 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.outdoorEvents && data.outdoorEvents.length > 0) {
                 const eventsSection = document.createElement('section');
                 eventsSection.className = 'events-section fade-in-up';
+                eventsSection.id = 'ladies-events-timeline';
                 const title = document.createElement('h3');
                 title.className = 'content-subtitle';
                 title.textContent = '2025 Outdoor Events';
@@ -162,7 +158,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             }
             
-// ADDED: A final separator before the results section
             const separator3 = document.createElement('hr');
             separator3.className = 'content-separator fade-in-up';
             ladiesContentContainer.parentElement.appendChild(separator3);
@@ -173,7 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultsSection.className = 'results-section fade-in-up';
                 ladiesContentContainer.parentElement.appendChild(resultsSection);
 
-                // ADDED: A title for the results section
                 const resultsTitle = document.createElement('h3');
                 resultsTitle.className = 'content-subtitle';
                 resultsTitle.textContent = 'Competition Results';
@@ -193,13 +187,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     gridContainer.className = 'results-grid';
                     resultData.competitions.forEach(comp => {
                         const card = document.createElement('div');
-                        card.className = 'result-card fade-in-up'; // ADDED CLASS for animation
-
-                        // --- NEW: Logic for singular vs. plural labels ---
+                        card.className = 'result-card fade-in-up';
                         const winnerLabel = comp.winner.length > 1 ? 'Winners' : 'Winner';
                         const runnerUpLabel = comp.runnerUp && comp.runnerUp.length > 1 ? 'Runners Up' : 'Runner Up';
-                        // --- END NEW ---
-
+                        
                         let runnerUpHtml = '';
                         if (comp.runnerUp && comp.runnerUp.length > 0) {
                             runnerUpHtml = `
@@ -260,20 +251,22 @@ document.addEventListener('DOMContentLoaded', () => {
                         const targetPanel = document.getElementById(e.target.dataset.target);
                         if(targetPanel) {
                             targetPanel.classList.add('is-active');
-                            animateResultCards(targetPanel); // MODIFIED
+                            animateResultCards(targetPanel);
                         }
                     }
                 });
                 
-                // Animate the cards in the initially active tab
                 const initialPanel = tabsContent.querySelector('.tab-panel.is-active');
                 if (initialPanel) {
-                    // Use a timeout to ensure the section is visible before animating
                     setTimeout(() => animateResultCards(initialPanel), 200);
                 }
             }
             
-            // --- Auto-scroll and Animation Observer Logic ---
+            // *** UPDATED ANIMATION LOGIC ***
+
+            // Check if we should suppress the initial confetti animation because of a URL hash
+            const suppressConfetti = window.location.hash === '#ladies-events-timeline';
+
             if (window.innerWidth >= 992) {
                 const timelineContainer = document.querySelector('.vertical-timeline');
                 const nextEventElement = document.getElementById('next-upcoming-event');
@@ -291,7 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (entry.isIntersecting) {
                         entry.target.style.transitionDelay = `${index * 100}ms`;
                         entry.target.classList.add('is-visible');
-                        if (entry.target.id === 'champion-card') {
+                        
+                        // Only play confetti if the flag is not set
+                        if (entry.target.id === 'champion-card' && !suppressConfetti) {
                             setTimeout(() => { party.confetti(entry.target, { count: party.variation.range(40, 60) }); }, 400);
                         }
                         observer.unobserve(entry.target);
@@ -305,6 +300,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 championCard.addEventListener('click', function () {
                     party.confetti(this, { count: party.variation.range(40, 60), size: party.variation.range(0.8, 1.2), speed: party.variation.range(300, 500) });
                 });
+            }
+
+            // Scroll to hash element on page load
+            if (window.location.hash) {
+                const id = window.location.hash.substring(1);
+                const element = document.getElementById(id);
+                if (element) {
+                    setTimeout(() => {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 150); 
+                }
             }
         })
         .catch(error => {

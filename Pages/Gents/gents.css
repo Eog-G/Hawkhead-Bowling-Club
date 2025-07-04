@@ -455,3 +455,8 @@
     transform: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
 }
+
+#gents-events-timeline {
+  /* Adjust the value to match your header's height */
+  scroll-margin-top: 6rem; 
+}

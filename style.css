@@ -468,8 +468,6 @@ body {
     margin-bottom: 0.75rem;
 }
 .news-card-icon {
-    height: 1rem;
-    width: 1rem;
     margin-right: 0.5rem;
 }
 .news-card-title {
@@ -721,4 +719,25 @@ body {
 .footer-shape-divider .shape-fill {
     /* This sets the color to match your dark green footer */
     fill: var(--color-green-900);
+}
+
+/* ADD this new class for the full-card anchor link */
+a.news-card-anchor {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* ADD a hover effect for the new anchor */
+a.news-card-anchor:hover {
+    transform: scale(1.02);
+}
+
+.news-card-link-text {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-green-600);
+    font-weight: 500;
+    text-decoration: none;
 }

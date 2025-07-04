@@ -48,42 +48,51 @@
   "socialEvents": {
     "year": 2025,
     "events": [
-      {
-        "date": "2025-04-12",
-        "name": "Opening Cabaret"
-      },
-      {
-        "date": "2025-05-24",
-        "name": "Fun Night"
-      },
-      {
-        "date": "2025-06-21",
-        "name": "Cabaret - Dolly Parton / Shania Twain"
-      },
-      {
-        "date": "2025-07-19",
-        "name": "Cabaret - Fun Night"
-      },
-      {
-        "date": "2025-08-16",
-        "name": "Cabaret - Blues Brothers"
-      },
-      {
-        "date": "2025-10-04",
-        "name": "Cabaret - Dynamix 80s"
-      },
-      {
-        "date": "2025-11-03",
-        "name": "Fun Night"
-      },
-      {
-        "date": "2025-11-22",
-        "name": "Cheese & Wine"
-      },
-      {
-        "date": "2025-12-20",
-        "name": "Xmas Dance"
-      }
-    ]
+  {
+    "date": "2025-04-12",
+    "name": "Opening Cabaret",
+    "description": "Kick off the season with a lively opening cabaret night."
+  },
+  {
+    "date": "2025-05-24",
+    "name": "Fun Night",
+    "description": "An evening of fun, games, and entertainment for all."
+  },
+  {
+    "date": "2025-06-21",
+    "name": "Cabaret - Dolly Parton / Shania Twain",
+    "description": "A themed cabaret night featuring Dolly Parton and Shania Twain tribute acts."
+  },
+  {
+    "date": "2025-07-19",
+    "name": "Fun Night",
+    "description": "Another fun-filled night of games, laughs, and entertainment."
+  },
+  {
+    "date": "2025-08-16",
+    "name": "Cabaret - Blues Brothers",
+    "description": "A Blues Brothers tribute cabaret night with live music and dancing."
+  },
+  {
+    "date": "2025-10-04",
+    "name": "Cabaret - Dynamix 80s",
+    "description": "Enjoy a nostalgic Dynamix 80s cabaret show with classic hits."
+  },
+  {
+    "date": "2025-11-03",
+    "name": "Fun Night",
+    "description": "Another fun-filled night of games, laughs, and entertainment."
+  },
+  {
+    "date": "2025-11-22",
+    "name": "Cheese & Wine",
+    "description": "Relax and enjoy an evening of cheese, wine, and good company."
+  },
+  {
+    "date": "2025-12-20",
+    "name": "Xmas Dance",
+    "description": "Celebrate the festive season with the club's annual Christmas dance."
+  }
+]
   }
 }
