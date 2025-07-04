@@ -436,3 +436,8 @@
     color: var(--color-green-200);
     text-decoration: underline;
 }
+
+#social-events-timeline {
+  /* Adjust the value to match your header's height */
+  scroll-margin-top: 6rem; 
+}

@@ -156,16 +156,3 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// --- ADDED: Logic to handle anchor link scrolling after page load ---
-window.addEventListener('load', () => {
-  if (window.location.hash) {
-    const id = window.location.hash.substring(1); // Get the ID from the hash, without the '#'
-    const element = document.getElementById(id);
-    if (element) {
-      // Use a small timeout to ensure all dynamic content is settled
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-    }
-  }
-});

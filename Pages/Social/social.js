@@ -1,8 +1,10 @@
+// Corrected Pages/Social/social.js
+
 document.addEventListener('DOMContentLoaded', () => {
     const socialContentContainer = document.getElementById('social-content-container');
     const introElement = document.getElementById('page-intro');
 
-    // --- HELPER FUNCTIONS ---
+    // --- HELPER FUNCTIONS (No changes here) ---
     function generateICS(event) {
         const eventDate = new Date(event.date);
         const year = eventDate.getFullYear();
@@ -37,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 10);
     }
 
-    // --- ICONS ---
+    // --- ICONS (No changes here) ---
     const icons = {
         organiser: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>',
         sun: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>',
@@ -45,12 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
         facebook: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>'
     };
 
-    // Use Promise.all to fetch both data files concurrently
     Promise.all([
         fetch('../../data/social.json').then(res => res.json()),
         fetch('../../data/contacts.json').then(res => res.json())
     ])
     .then(([socialData, contactsData]) => {
+        
+        // ... all the page building logic ... (this is all correct)
         if (socialData.pageIntro) {
             introElement.textContent = socialData.pageIntro;
         }
@@ -94,8 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (socialData.socialEvents && socialData.socialEvents.events.length > 0) {
             const eventsSection = document.createElement('section');
             eventsSection.className = 'events-section fade-in-up';
-            // --- ADDED ID FOR ANCHOR LINK ---
-            eventsSection.id = 'social-events-timeline'; 
+            eventsSection.id = 'social-events-timeline';
             const title = document.createElement('h3');
             title.className = 'content-subtitle';
             title.textContent = `Social Events ${socialData.socialEvents.year}`;
@@ -206,17 +208,12 @@ document.addEventListener('DOMContentLoaded', () => {
         separator3.className = 'content-separator fade-in-up';
         socialContentContainer.appendChild(separator3);
 
-        // --- Build the final Info Banner ---
         const fbContact = contactsData.clubContacts.find(c => c.name === "Facebook Page");
         if (fbContact && fbContact.value) {
-
             const banner = document.createElement('div');
             banner.className = 'info-banner fade-in-up';
-
-            // UPDATED: More concise banner text
             const bannerText = "For the latest updates and fun night details, check the Social Notice Board and our [Facebook Page].";
             const linkHtml = `<a href="${fbContact.value}" target="_blank" rel="noopener noreferrer">Facebook Page</a>`;
-            
             banner.innerHTML = `
                 <div class="info-banner-icon">${icons.facebook}</div>
                 <p>${bannerText.replace('[Facebook Page]', linkHtml)}</p>
@@ -259,6 +256,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const initialPanel = document.querySelector('.tab-panel.is-active');
         if (initialPanel) {
             setTimeout(() => animateTimeEntries(initialPanel), 200);
+        }
+
+        // --- THIS IS THE CORRECTED CODE ---
+        // It runs directly inside the .then() block, after everything is created.
+        if (window.location.hash) {
+            const id = window.location.hash.substring(1);
+            const element = document.getElementById(id);
+            if (element) {
+                // Use a small timeout to ensure the browser has finished rendering the new content
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 150); 
+            }
         }
     })
     .catch(error => {
