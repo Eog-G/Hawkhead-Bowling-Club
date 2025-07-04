@@ -822,3 +822,71 @@ a.news-card-anchor,
     line-height: 1.6;
     margin: 0;
 }
+
+/* --- Sponsors Section --- */
+.sponsors-section {
+    padding: 4rem 0;
+    background-color: var(--color-gray-50);
+}
+
+.sponsors-grid {
+    display: flex;
+    flex-wrap: wrap; /* Allows sponsors to wrap to the next line if there are many */
+    justify-content: center; /* This centers the group of sponsors horizontally */
+    align-items: center;
+    gap: 2rem; /* The space between sponsor logos */
+    margin-top: 3rem;
+}
+
+.sponsor-logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px; /* A fixed height for uniform vertical alignment */
+    padding: 1rem;
+    background-color: var(--color-white);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    /* Sizing rules for responsiveness */
+    flex-grow: 1; /* Allow the item to grow */
+    flex-shrink: 1; /* Allow the item to shrink */
+    flex-basis: 180px; /* Each item will have a base width */
+    max-width: 220px; /* But won't grow larger than this */
+}
+
+.sponsor-logo-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+}
+
+.sponsor-logo {
+    width: 100%;
+    height: auto;
+    max-height: 80px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.sponsor-logo-link:hover .sponsor-logo {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+/* --- Staggered Animation for Dynamic Sections --- */
+.news-card-anchor,
+.sponsor-logo-link {
+    opacity: 0;
+    transform: translateY(-40px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transition-delay: 120ms;
+}
+
+.news-card-anchor.is-visible,
+.sponsor-logo-link.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
