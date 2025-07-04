@@ -256,3 +256,7 @@
 #modal-continue-button {
   width: 100%;
 }
+
+.list-instructions{
+    text-align: left;
+}

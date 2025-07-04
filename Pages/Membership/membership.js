@@ -247,6 +247,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     addField('Telephone:', data.phone);
                     addField('Date of Birth:', data.dob || 'Not Provided');
                     
+                    // Add the new signature field to the PDF
+                    addField('Signature:', data.signature);
+                    
                     y += 10;
                     doc.line(20, y - 5, 190, y - 5);
 
@@ -267,22 +270,25 @@ document.addEventListener('DOMContentLoaded', () => {
                         y += (lines.length * 5) + 4;
                     });
                     
-                    y += 15;
+                    y += 20; // Add extra space for the new signature areas
                     
+                    // Add blank Chairperson signature and date lines
                     doc.setFont('helvetica', 'bold');
-                    doc.text('Signature:', x_label, y);
+                    doc.text('Chairperson Signature:', x_label, y);
                     doc.setLineWidth(0.2);
-                    doc.line(x_label + 25, y, 150, y);
+                    doc.line(x_label + 50, y, 190, y);
+                    y += 15;
+                    doc.text('Date:', x_label, y);
+                    doc.line(x_label + 15, y, 100, y);
+
 
                     const fileName = `HBC-Membership-Application-${data.fullName.replace(/\s/g, '_')}.pdf`;
                     doc.save(fileName);
 
-                    // Prepare the mailto link and store it
                     const subject = `${data.fullName} - Membership Application Form`;
                     const body = `Hello,\n\nPlease find my completed membership application form attached.\n\nThank you,\n${data.fullName}`;
                     mailtoLink = `mailto:${clubEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-                    // Show the modal
                     confirmationModal.classList.add('is-visible');
 
                 } catch (error) {

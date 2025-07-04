@@ -61,6 +61,12 @@
             "type": "date"
         },
         {
+            "name": "signature",
+            "label": "Signature (Please type your full name)",
+            "type": "text",
+            "required": true
+        },
+        {
             "type": "separator"
         },
         {
