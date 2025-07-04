@@ -892,3 +892,27 @@ a.news-card-anchor,
     visibility: visible; /* Added for consistency */
     transform: translateY(0);
 }
+
+/* --- Positioning for the sponsor logo on event cards --- */
+
+/* Add position: relative to the content area so the logo can be positioned inside it */
+.news-card-content {
+    position: relative;
+}
+
+.event-sponsor {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(4px);
+    padding: 0.25rem;
+    border-radius: 0.375rem; /* 6px */
+    display: flex;
+    align-items: center;
+}
+
+.event-sponsor img {
+    height: 30px; /* Adjust size as needed */
+    width: auto;
+}

@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearsOfHistoryElement = document.getElementById('years-of-history');
   if (yearsOfHistoryElement) {
     const currentYear = new Date().getFullYear();
-    yearsOfHistoryElement.textContent = currentYear - 1912;
+    yearsOfHistoryElement.textContent = currentYear - 1921;
   }
 
   const menuButton = document.getElementById('mobile-menu-button');
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
       animationObserver.observe(card);
   });
 
-  const loadUpcomingEvents = async () => {
+const loadUpcomingEvents = async () => {
     const newsGrid = document.querySelector('.news-grid');
     if (!newsGrid) return;
 
@@ -204,12 +204,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const formattedDate = new Date(event.date).toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'});
             const imageUrl = getEventImageUrl(event);
             const description = event.description || `This is an event for the <strong>${event.type} Section</strong>.`;
+
+            // --- NEW CODE ---
+            // Check for the sponsor and prepare the sponsor logo HTML
+            let sponsorHtml = '';
+            if (event.name.toLowerCase().includes('moodie')) {
+                sponsorHtml = `
+                    <div class="event-sponsor">
+                        <img src="assets/images/sponsors/d-moodie-&-co.png" alt="Sponsored by D Moodie & Co Ltd" title="Sponsored by D Moodie & Co Ltd">
+                    </div>
+                `;
+            }
+            // --- END OF NEW CODE ---
+
             const anchor = document.createElement('a');
             anchor.href = event.link;
             anchor.className = 'news-card-anchor';
             const card = document.createElement('article');
             card.className = 'news-card';
-            card.innerHTML = `<img src="${imageUrl}" alt="${event.name}" class="news-card-image"><div class="news-card-content"><div class="news-card-meta"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="news-card-icon"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg><span>${formattedDate}</span></div><h3 class="news-card-title">${event.name}</h3><p class="news-card-excerpt">${description}</p><div class="news-card-link-text">Go to ${event.type} Section <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div></div>`;
+            
+            // --- MODIFIED LINE ---
+            // Add the sponsorHtml to the card's content
+            card.innerHTML = `
+                <img src="${imageUrl}" alt="${event.name}" class="news-card-image">
+                <div class="news-card-content">
+                    ${sponsorHtml}
+                    <div class="news-card-meta">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="news-card-icon"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                        <span>${formattedDate}</span>
+                    </div>
+                    <h3 class="news-card-title">${event.name}</h3>
+                    <p class="news-card-excerpt">${description}</p>
+                    <div class="news-card-link-text">Go to ${event.type} Section <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="button-icon"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+                </div>`;
+            
             anchor.appendChild(card);
             anchor.style.transitionDelay = `${index * 100}ms`;
             animationObserver.observe(anchor);
